@@ -1,0 +1,14 @@
+.side-nav {
+    background-color: gray;
+    height: 500px;
+
+}
+
+.nav-link {
+    color: black;
+}
+
+.dashboard {
+    background-color: black;
+    color: blanchedalmond;
+}
