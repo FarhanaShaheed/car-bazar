@@ -16,10 +16,10 @@ const MoreCars = () => {
         <div>
             <Navigation></Navigation>
             <Container>
-            <h2 className="services-class">Top Notch Destinations</h2>
+            <h2 className="services-class">Available Cars</h2>
             <Row xs={1} md={3} className="g-4">
             {
-                cars.map(car => <Car
+                cars.slice(0,6)?.map(car => <Car
                     key={car._id}
                     car={car}
                     ></Car>)

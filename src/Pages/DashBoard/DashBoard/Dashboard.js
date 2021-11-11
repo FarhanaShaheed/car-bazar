@@ -15,7 +15,7 @@ import ManageOrders from './../ManageOrders/ManageOrders';
 import useAuth from '../../../hooks/useAuth';
 import Payment from '../Payment/Payment';
 import MyOrders from '../MyOrders/MyOrders';
-import Reviews from './../Reviews/Reviews';
+import AddReviews from './../AddReviews/AddReviews';
 
 const Dashboard = () => {
     let { path, url } = useRouteMatch();
@@ -37,7 +37,7 @@ const Dashboard = () => {
                     <div>
                         <Link  className="nav-link" to={`${url}/payment`}>Payment</Link>
                         <Link  className="nav-link" to={`${url}/myOrders`}>My Orders</Link>
-                        <Link  className="nav-link" to={`${url}/reviews`}>Reviews</Link>
+                        <Link  className="nav-link" to={`${url}/addreviews`}>Add Reviews</Link>
                     </div>
                     }
                     <Button variant="dark" onClick={logout}>Logout</Button>
@@ -68,8 +68,8 @@ const Dashboard = () => {
                     <Route path={`${path}/myOrders`}>
                     <MyOrders></MyOrders>
                     </Route>
-                    <Route path={`${path}/reviews`}>
-                     <Reviews></Reviews>
+                    <Route path={`${path}/addreviews`}>
+                     <AddReviews></AddReviews>
                     </Route>
                 </Switch>
                 </Col>

@@ -14,7 +14,7 @@ const Car = ({car}) => {
          <Card.Title className="card-title">$ {price}</Card.Title>
          <Card.Text>Condition: {condition}</Card.Text>
          <Link to={`/booking/${_id}`}>
-         <Button>Book Here </Button>
+         <Button variant="dark">Book Here </Button>
          </Link>
          </Card.Body>
      </Card>

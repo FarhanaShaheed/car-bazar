@@ -1,11 +1,15 @@
 import React from 'react';
 import { useForm } from "react-hook-form";
+import useAuth from '../../../hooks/useAuth';
 
-const AddProduct = () => {
+
+const AddReviews = () => {
     const { register, handleSubmit,reset } = useForm();
-  const onSubmit = data =>{
-       console.log(data);
-       fetch('http://localhost:5000/cars',{
+    const {user} = useAuth();
+    console.log(user);
+    const onSubmit = data =>{
+        console.log(data);
+        fetch('http://localhost:5000/reviews',{
            method: 'POST',
            headers:{
             'content-type': 'application/json'
@@ -23,21 +27,20 @@ const AddProduct = () => {
 
     return (
         <div>
-            <h2>Add A Product</h2>
+            <h2>Add Reviews</h2>
             <form onSubmit={handleSubmit(onSubmit)}>
-      <input {...register("name")} placeholder="Product Name"/>
+      <input {...register("name")} placeholder="Your Name" defaultValue={user.name}/>
       <br />
-      <input {...register("img")} placeholder="Product Img URL"/>
+      <input type="email" {...register("email")} placeholder="email" defaultValue={user.email} />
       <br />
-      <input type="number" {...register("price")} placeholder="Product Price"/>
+      <input {...register("opinion")} placeholder="Your Opinion"/>
       <br />
-      <input {...register("condition")} placeholder="Product Condition"/>
+      <input type="number" {...register("rating")} placeholder="Rating"/>
       <br />
       <input type="submit" />
     </form>
-            
         </div>
     );
 };
 
-export default AddProduct;
+export default AddReviews;
