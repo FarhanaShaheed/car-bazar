@@ -1,18 +1,37 @@
 import React, { useEffect } from 'react';
 import useAuth from '../../../hooks/useAuth';
 import { useState } from 'react';
-import { Table } from 'react-bootstrap';
+import { Table, Button } from 'react-bootstrap';
 
 const MyOrders = () => {
     const {user}= useAuth();
     const[myOrders,setMyOrders] = useState([]);
 
     useEffect( () =>{
-        const url = `http://localhost:5000/bookings?email=${user.email}`
+        const url = `http://localhost:5000/bookings/${user?.email}`
         fetch(url)
         .then(res =>res.json())
         .then(data => setMyOrders(data));
-    },[])
+    },[user?.email])
+
+    //DELETE AN ORDER
+    const handleDeleteOrder = id =>{
+        const proceed = window.confirm('Are You sure you want to delete?');
+        if(proceed){
+          const url = `http://localhost:5000/bookings/${id}`;
+          fetch(url,{
+              method: 'DELETE'
+          })
+          .then(res=>res.json())
+          .then(data =>{
+              if(data.deletedCount >0){
+                  alert('Deleted Successfully');
+                  const remainingOrders = myOrders.filter(orders => orders._id !== id);
+                  setMyOrders(remainingOrders);
+              }
+          });
+        }
+      }
     return (
         <div>
             <h2>Orders:{myOrders.length}</h2>
@@ -38,7 +57,7 @@ const MyOrders = () => {
                 <td>{orders?.carName}</td>
                 <td>$ {orders?.carPrice}</td>
                 <td>{orders?.phone}</td>
-                {/* <td><Button onClick={()=> handleDeletemyBooking(bookings._id)}>Cancel</Button></td> */}
+                <td><Button onClick={()=> handleDeleteOrder(orders._id)}>Delete</Button></td>
                 
                 </tr>
             </tbody>

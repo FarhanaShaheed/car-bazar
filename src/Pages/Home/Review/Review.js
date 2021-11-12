@@ -1,8 +1,11 @@
 import React from 'react';
 import { Card, Container } from 'react-bootstrap';
+import Rating from 'react-rating';
+import '../Review/Review.css';
 
 const Review = ({review}) => {
     const {name,email,opinion,rating} = review;
+
 
     return (
         <Container>
@@ -13,10 +16,13 @@ const Review = ({review}) => {
                 <Card.Text>
                 "{opinion}"
                 </Card.Text>
-                 Rating: {rating}
-                 
                  <br />
-                <Card.Link href="#">Another Link</Card.Link>
+                 <Rating
+                 emptySymbol="far fa-star icon-color"
+                 fullSymbol="fas fa-star icon-color"
+                 initialRating={rating}
+                 readonly
+                 />
             </Card.Body>
             </Card>
         </Container>

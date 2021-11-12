@@ -16,6 +16,7 @@ import useAuth from '../../../hooks/useAuth';
 import Payment from '../Payment/Payment';
 import MyOrders from '../MyOrders/MyOrders';
 import AddReviews from './../AddReviews/AddReviews';
+import AdminRoute from './../../Login/AdminRoute/AdminRoute';
 
 const Dashboard = () => {
     let { path, url } = useRouteMatch();
@@ -50,18 +51,18 @@ const Dashboard = () => {
                     <Route exact path={path}>
                     <DashboardHome></DashboardHome>
                     </Route>
-                    <Route path={`${path}/makeAdmin`}>
+                    <AdminRoute path={`${path}/makeAdmin`}>
                     <MakeAdmin></MakeAdmin>
-                    </Route>
-                    <Route path={`${path}/addProduct`}>
+                    </AdminRoute>
+                    <AdminRoute path={`${path}/addProduct`}>
                     <AddProduct></AddProduct>
-                    </Route>
-                    <Route path={`${path}/manageProducts`}>
+                    </AdminRoute>
+                    <AdminRoute path={`${path}/manageProducts`}>
                     <ManageProducts></ManageProducts>
-                    </Route>
-                    <Route path={`${path}/manageOrders`}>
+                    </AdminRoute>
+                    <AdminRoute path={`${path}/manageOrders`}>
                     <ManageOrders></ManageOrders>
-                    </Route>
+                    </AdminRoute>
                     <Route path={`${path}/payment`}>
                     <Payment></Payment>
                     </Route>
