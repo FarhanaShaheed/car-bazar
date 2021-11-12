@@ -7,6 +7,7 @@ initializeFirebase();
 const useFirebase = () =>{
     const [user,setUser] = useState({});
     const [isLoading, setIsLoading] = useState(true);
+    const [isAdminLoading, setIsAdminLoading] = useState(true);
     const[authError, setAuthError] = useState('');
     const[admin,setAdmin] = useState(false);
     const[token,setToken] = useState('');
@@ -75,7 +76,12 @@ const useFirebase = () =>{
     useEffect(()=>{
         const unsubscribed = onAuthStateChanged(auth, (user) => {
             if (user) {
+              setIsAdminLoading(true);
               setUser(user);
+              fetch(`https://murmuring-island-34247.herokuapp.com/users/${user.email}`)
+              .then(res =>res.json())
+              .then(data => setAdmin(data.admin))
+              .finally(() =>setIsAdminLoading(false))
               getIdToken(user)
               .then(idToken =>{
                 setToken(idToken);
@@ -88,11 +94,11 @@ const useFirebase = () =>{
           return() => unsubscribed;
     },[])
     
-    useEffect(() =>{
+    /* useEffect(() =>{
         fetch(`https://murmuring-island-34247.herokuapp.com/users/${user.email}`)
         .then(res =>res.json())
         .then(data => setAdmin(data.admin))
-    },[user.email])
+    },[user.email]) */
 
     //logout
 
@@ -124,6 +130,7 @@ const useFirebase = () =>{
         registerUser,
         authError,
         loginUser,
+        isAdminLoading,
         signInWithGoogle,
         logout,
     }

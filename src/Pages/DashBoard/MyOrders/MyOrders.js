@@ -44,6 +44,7 @@ const MyOrders = () => {
             <th>Car Name</th>
             <th>Car Price</th>
             <th>Phone</th>
+            <th>Status</th>
             <th>Action</th>
             </tr>
         </thead>
@@ -57,7 +58,10 @@ const MyOrders = () => {
                 <td>{orders?.carName}</td>
                 <td>$ {orders?.carPrice}</td>
                 <td>{orders?.phone}</td>
-                <td><Button onClick={()=> handleDeleteOrder(orders._id)}>Delete</Button></td>
+                <td>{orders?.status}</td>
+                <td>{
+                    (orders?.status === 'pending') && <Button onClick={()=> handleDeleteOrder(orders?._id)}>Delete</Button>
+                    }</td>
                 
                 </tr>
             </tbody>

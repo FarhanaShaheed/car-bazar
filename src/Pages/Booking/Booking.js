@@ -29,6 +29,7 @@ const Booking = () => {
              carName: carName,
              carPrice: carPrice
          }
+         bookingData.status="pending"
          //send to the server
          fetch('https://murmuring-island-34247.herokuapp.com/bookings',{
              method: 'POST',

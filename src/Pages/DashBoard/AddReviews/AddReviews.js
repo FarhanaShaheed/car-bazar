@@ -35,7 +35,8 @@ const AddReviews = () => {
       <br />
       <input {...register("opinion")} placeholder="Your Opinion"/>
       <br />
-      <input type="number" {...register("rating")} placeholder="Rating"/>
+      <p>Enter Number between 0 and 5</p>
+      <input type="number" step="0.1" {...register("rating", { min: 0, max: 5 })} placeholder="Rating"/>
       <br />
       <input type="submit" />
     </form>

@@ -9,12 +9,12 @@ const Review = ({review}) => {
 
     return (
         <Container>
-            <Card style={{ width: '18rem' }}>
+            <Card className="review-card">
             <Card.Body>
-                <Card.Title>Name: {name}</Card.Title>
+                <Card.Title><i class="fas fa-user"></i> {name}</Card.Title>
                 <Card.Subtitle className="mb-2 text-muted">Email: {email}</Card.Subtitle>
                 <Card.Text>
-                "{opinion}"
+                "{opinion.slice(0,15)}"
                 </Card.Text>
                  <br />
                  <Rating

@@ -8,9 +8,9 @@ const Navigation = () => {
   console.log()
     return (
         <div>
-            <Navbar bg="dark" variant="dark">
+            <Navbar bg="dark" variant="dark" fixed="top" collapseOnSelect expand="lg">
     <Container>
-    <Navbar.Brand href="#home">Car Bazar</Navbar.Brand>
+    <Navbar.Brand href="#home"><i class="fas fa-car"></i> Car Bazar</Navbar.Brand>
     <Nav className="ms-auto">
       <Nav.Link as={Link} to="/home#home">Home</Nav.Link>
       <Nav.Link as={Link} to="/morecars">More Cars</Nav.Link>

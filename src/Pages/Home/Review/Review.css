@@ -1,3 +1,9 @@
 .icon-color {
     color: gold;
 }
+
+.review-card {
+    width: 18rem;
+    height: 12rem;
+    color: black;
+}
