@@ -8,7 +8,7 @@ const MoreCars = () => {
 
     useEffect(() =>{
         //fetch('./cars.json')
-        fetch('http://localhost:5000/cars')
+        fetch('https://murmuring-island-34247.herokuapp.com/cars')
         .then(res => res.json())
         .then(data => setCars(data));
     },[])

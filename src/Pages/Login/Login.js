@@ -70,7 +70,7 @@ const Login = () => {
               <Button onClick={handleGoogleSignIn} variant="dark">Google Signin</Button>
               <p className="mt-3">New User? Please <Link to="/register">Register</Link></p>
             </Col>
-            <Col xs={6} md={6}>
+            <Col xs={12} md={6}>
               <Image src={login} fluid></Image>
             </Col>
           </Row>

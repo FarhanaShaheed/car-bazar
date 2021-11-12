@@ -82,7 +82,7 @@ const Register = () => {
 
           <p className="mt-3">Already Registered? Please <Link to="/login">Login</Link></p>
         </Col>
-        <Col xs={6} md={6}>
+        <Col xs={12} md={6}>
           <Image src={login} fluid></Image>
         </Col>
       </Row>

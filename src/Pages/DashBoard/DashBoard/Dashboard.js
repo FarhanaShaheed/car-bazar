@@ -45,7 +45,7 @@ const Dashboard = () => {
                 </Col>
             
             
-            <Col sm={9}>
+            <Col className="pd-reduce" sm={9}>
                 <h2 className="dashboard">DashBoard</h2>
             <Switch>
                     <Route exact path={path}>

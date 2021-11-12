@@ -1,6 +1,6 @@
 .side-nav {
     background-color: gray;
-    height: 500px;
+    height: 100vh;
 
 }
 
@@ -11,4 +11,8 @@
 .dashboard {
     background-color: black;
     color: blanchedalmond;
+}
+
+.pd-reduce {
+    padding-left: 0 !important;
 }

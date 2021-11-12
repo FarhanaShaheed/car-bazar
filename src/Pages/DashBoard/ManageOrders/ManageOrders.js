@@ -6,7 +6,7 @@ const ManageOrders = () => {
     const[allOrders,setAllOrders] = useState();
 
     useEffect(() =>{
-        fetch('http://localhost:5000/bookings')
+        fetch('https://murmuring-island-34247.herokuapp.com/bookings')
         .then(res => res.json())
         .then(data => setAllOrders(data))
     },[])
@@ -15,7 +15,7 @@ const ManageOrders = () => {
     const handleDeleteOrder = id =>{
       const proceed = window.confirm('Are You sure you want to delete?');
       if(proceed){
-        const url = `http://localhost:5000/bookings/${id}`;
+        const url = `https://murmuring-island-34247.herokuapp.com/bookings/${id}`;
         fetch(url,{
             method: 'DELETE'
         })

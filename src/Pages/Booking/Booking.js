@@ -30,7 +30,7 @@ const Booking = () => {
              carPrice: carPrice
          }
          //send to the server
-         fetch('http://localhost:5000/bookings',{
+         fetch('https://murmuring-island-34247.herokuapp.com/bookings',{
              method: 'POST',
              headers: {
                  'content-type': 'application/json'
@@ -47,7 +47,7 @@ const Booking = () => {
     }
 
     useEffect(()=>{
-        fetch(`http://localhost:5000/cars/${carId}`)
+        fetch(`https://murmuring-island-34247.herokuapp.com/cars/${carId}`)
         .then(res => res.json())
         .then(data => setBookingDetails(data))
     },[])
