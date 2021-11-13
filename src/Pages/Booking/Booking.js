@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Col, Container, Row, Image, Button} from 'react-bootstrap';
 import useAuth from '../../hooks/useAuth';
 import Navigation from '../Home/Navigation/Navigation';
+import '../DashBoard/AddReviews/AddReviews.css';
 
 const Booking = () => {
     const{carId} = useParams();
@@ -53,9 +54,9 @@ const Booking = () => {
         .then(data => setBookingDetails(data))
     },[])
     return (
-        <div>
+        <div className="reviews-form">
             <Navigation></Navigation>
-            <h2>Your Car Details:{bookingDetails.name}</h2>
+            <h2 className="mt-5">Your Car Details:{bookingDetails.name}</h2>
             <Container>
             <Row>
                 <Col xs={12} md={6}>

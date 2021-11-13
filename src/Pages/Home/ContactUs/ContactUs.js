@@ -6,11 +6,10 @@ import '../ContactUs/ContactUs.css';
 const ContactUs = () => {
     return (
         <div>
+            <h2 className="mt-5">Contact Us</h2>
             <Container className="contact-class">
-        
         <Row className="m-5">
         <Col xs={12} md={6}>
-         <h2>Drop us a line</h2>
          <form action="">
              <input type="text" placeholder="Name"/>
              <br />
@@ -34,7 +33,7 @@ const ContactUs = () => {
             </div>
             <div  className="col-sm-6">
             <h5> Phone: <span>374765290293</span></h5>
-               <h5> Email: <span>info@travel.com</span></h5>
+               <h5> Email: <span>car@bazar.com</span></h5>
                <h5> Check-Out: <span>11:00am</span></h5>
             </div>
             

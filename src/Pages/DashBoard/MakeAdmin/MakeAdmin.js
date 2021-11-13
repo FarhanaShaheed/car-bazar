@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Alert, Button } from 'react-bootstrap';
+import '../MakeAdmin/MakeAdmin.css';
 
 const MakeAdmin = () => {
     const[email,setEmail] = useState('');
@@ -26,7 +27,7 @@ const MakeAdmin = () => {
         e.preventDefault();
     }
     return (
-        <div>
+        <div className="admin-form">
             <h2>Make An Admin</h2>
             <form onSubmit={handleAdminSubmit}>
              <input style={{width:'40%'}} type="email"
@@ -34,7 +35,7 @@ const MakeAdmin = () => {
              onBlur={handleOnBlur}
              name=""/>
              <br />
-             <Button className="mt-3" type="submit">Make Admin</Button>
+             <Button variant="dark" className="mt-3" type="submit">Make Admin</Button>
             </form>
             {success && <Alert className="mt-2" variant="success">
              Made Admin successfully !!

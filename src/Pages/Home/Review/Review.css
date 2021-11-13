@@ -3,7 +3,7 @@
 }
 
 .review-card {
-    width: 18rem;
+    background-color: black;
     height: 12rem;
-    color: black;
+    color: white;
 }

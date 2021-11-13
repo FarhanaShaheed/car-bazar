@@ -13,6 +13,7 @@ const Car = ({car}) => {
        <Card.Body>
          <Card.Title className="card-title"><i class="fas fa-user"></i> {name}</Card.Title>
          <Card.Title className="card-title"><i class="fas fa-money-bill-alt"></i> $ {price}</Card.Title>
+         
          <Card.Text>Condition: <b>{condition}</b></Card.Text>
          <Link to={`/booking/${_id}`}>
          <Button variant="dark">Book Here </Button>

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import useAuth from '../../../hooks/useAuth';
 import { useState } from 'react';
 import { Table, Button } from 'react-bootstrap';
+import '../MyOrders/MyOrders.css';
 
 const MyOrders = () => {
     const {user}= useAuth();
@@ -59,9 +60,15 @@ const MyOrders = () => {
                 <td>$ {orders?.carPrice}</td>
                 <td>{orders?.phone}</td>
                 <td>{orders?.status}</td>
-                <td>{
+                {/* <td>{
                     (orders?.status === 'pending') && <Button onClick={()=> handleDeleteOrder(orders?._id)}>Delete</Button>
-                    }</td>
+                    }
+                </td> */}
+                <td>{
+                    (orders?.status === 'pending') ? <Button className="btn-danger" onClick={()=> handleDeleteOrder(orders?._id)}>Delete</Button> : 
+                    <div className="icon-color"><i class="fas fa-check fa-2x"></i></div> 
+                    }
+                </td>
                 
                 </tr>
             </tbody>

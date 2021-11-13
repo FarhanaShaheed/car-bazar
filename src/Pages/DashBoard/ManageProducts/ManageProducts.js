@@ -48,7 +48,7 @@ const ManageProducts = () => {
                     <td>{products?.name}</td>
                     <td>{products?.price}</td>
                     <td>{products?.condition}</td>
-                    <td><Button onClick={()=> handleDeleteProducts(products._id)}>Delete</Button></td>
+                    <td><Button variant="danger" onClick={()=> handleDeleteProducts(products._id)}>Delete</Button></td>
                     
                     </tr>
                 </tbody>)

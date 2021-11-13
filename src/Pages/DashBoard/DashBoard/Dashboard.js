@@ -26,7 +26,7 @@ const Dashboard = () => {
         <div>
             <Row>
                 <Col className="side-nav" sm={3}>
-                    <h2>Side Nav</h2>
+                    <h2 className="m-4">More Options</h2>
                     <Link className="nav-link" to="/home">Home</Link>
                     <Link  className="nav-link" to={`${url}`}>Dashboard</Link>
                     {admin ? <div>
@@ -41,7 +41,7 @@ const Dashboard = () => {
                         <Link  className="nav-link" to={`${url}/addreviews`}>Add Reviews</Link>
                     </div>
                     }
-                    <Button variant="dark" onClick={logout}>Logout</Button>
+                    <Button className="mt-3" variant="dark" onClick={logout}>Logout</Button>
                 </Col>
             
             

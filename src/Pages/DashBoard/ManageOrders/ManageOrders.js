@@ -80,8 +80,8 @@ const ManageOrders = () => {
                     <td>{order?.carName}</td>
                     <td>{order?.carPrice}</td>
                     <td>{order?.status}</td>
-                    <td><Button onClick={()=> handleDeleteOrder(order?._id)}>Delete</Button></td>
-                    <td><Button onClick={()=> handleUpdate(order?._id)}>Confirm</Button></td>
+                    <td><Button variant="danger" onClick={()=> handleDeleteOrder(order?._id)}>Delete</Button></td>
+                    <td><Button variant="success" onClick={()=> handleUpdate(order?._id)}>Confirm</Button></td>
                     </tr>
                 </tbody>)
             }

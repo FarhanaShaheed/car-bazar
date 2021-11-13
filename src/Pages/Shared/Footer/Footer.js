@@ -15,6 +15,7 @@ const Footer = () => {
              <div className="col-sm-4">
                  <h4>Connect Wth Us</h4>
                  <p>SOCIAL MEDIA CHANNELS</p>
+                 <i class="fab fa-facebook-square"></i> <i class="fab fa-google-plus-square"></i> <i class="fab fa-twitter-square"></i> <i class="fab fa-instagram-square"></i>
                  
 
              </div>

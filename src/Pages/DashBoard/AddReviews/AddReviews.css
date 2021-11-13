@@ -1,0 +1,14 @@
+.reviews-form {
+    margin-top: 40px;
+}
+
+.reviews-form input {
+    width: 40%;
+    margin: 10px;
+    border-radius: 5px;
+}
+
+.reviews-submit {
+    background-color: black;
+    color: white;
+}
