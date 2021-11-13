@@ -2,7 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://car-bazar-4d9a6.web.app/).
 
-## Cars
+## Car Bazar
 
 In the project there are some cars which are come from database directly. The admin and users both can see the cars without login.
 
