@@ -66,7 +66,7 @@ const MyOrders = () => {
                 </td> */}
                 <td>{
                     (orders?.status === 'pending') ? <Button className="btn-danger" onClick={()=> handleDeleteOrder(orders?._id)}>Delete</Button> : 
-                    <div className="icon-color"><i class="fas fa-check fa-2x"></i></div> 
+                    <div className="icon-approve-color"><i class="fas fa-check fa-2x"></i></div> 
                     }
                 </td>
                 
