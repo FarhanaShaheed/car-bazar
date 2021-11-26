@@ -1,6 +1,6 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://car-bazar-4d9a6.web.app/).
+This project was bootstrapped with [Car Bazar](https://car-bazar-4d9a6.web.app/).
 
 ## Car Bazar
 
@@ -8,7 +8,7 @@ In the project there are some cars which are come from database directly. The ad
 
 ### Admin:
 
-Admin need to login with specific id and password. After the admin lohin he can see an option called dashboard in the navbaer.there are some options for admin which are add an admin,add products, manage prodects. 
+Admin need to login with specific id and password. After the admin login he can see an option called dashboard in the navbar.There are some options for admin which are add an admin,add products, manage prodects. 
 
 ### User:
 
@@ -16,7 +16,7 @@ New users need to register first then he can log in there. After the login he ca
 
 ### Review:
 
-After the login the users can give review as feedback.they can gove rating and it will show dynamically in the home page.
+After the login the users can give review as feedback.They can give rating and it will show dynamically in the home page.
 
 ### Private route and Admin Route:
 
