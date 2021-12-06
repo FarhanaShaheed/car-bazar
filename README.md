@@ -1,6 +1,5 @@
 # Getting Started with Create React App
-
-This project was bootstrapped with [Car Bazar](https://car-bazar-4d9a6.web.app/).
+ [Car Bazar](https://car-bazar-4d9a6.web.app/).
 
 ## Car Bazar
 
