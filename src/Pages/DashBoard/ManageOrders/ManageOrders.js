@@ -1,94 +1,64 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
-import { Table, Button } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { AdminPage } from '../ui/AdminUI';
+
+const LS = 'cb_demo_bookings';
 
 const ManageOrders = () => {
-    const[allOrders,setAllOrders] = useState();
-    const[approved,setApproved] = useState(false);
+  const [allOrders, setAllOrders] = useState([]);
+  const [approved, setApproved] = useState(false);
 
-    useEffect(() =>{
-        fetch('https://murmuring-island-34247.herokuapp.com/bookings')
-        .then(res => res.json())
-        .then(data => setAllOrders(data))
-    },[approved])
+  useEffect(() => {
+    fetch('http://localhost:5000/bookings')
+      .then((res) => { if (!res.ok) throw new Error('api'); return res.json(); })
+      .then(setAllOrders)
+      .catch(() => { try { setAllOrders(JSON.parse(localStorage.getItem(LS) || '[]')); } catch (e) { setAllOrders([]); } });
+  }, [approved]);
 
-    //DELETE AN ORDER
-    const handleDeleteOrder = id =>{
-      const proceed = window.confirm('Are You sure you want to delete?');
-      if(proceed){
-        const url = `https://murmuring-island-34247.herokuapp.com/bookings/${id}`;
-        fetch(url,{
-            method: 'DELETE'
-        })
-        .then(res=>res.json())
-        .then(data =>{
-            if(data.deletedCount >0){
-                alert('Deleted Successfully');
-                const remainingOrders = allOrders.filter(order => order._id !== id);
-                setAllOrders(remainingOrders);
-            }
-        });
-      }
-    }
-    
-    //UPDATE STATUS
+  const local = (fn) => { try { const all = JSON.parse(localStorage.getItem(LS) || '[]'); localStorage.setItem(LS, JSON.stringify(fn(all))); } catch (e) {} };
 
-    const update ={
-        status: 'Approved'
-    }
+  const handleDeleteOrder = (id) => {
+    if (!window.confirm('Delete this order?')) return;
+    fetch(`http://localhost:5000/bookings/${id}`, { method: 'DELETE' })
+      .then((r) => { if (!r.ok) throw new Error('api'); return r.json(); })
+      .catch(() => local((all) => all.filter((b) => b._id !== id)))
+      .finally(() => setAllOrders((o) => o.filter((x) => x._id !== id)));
+  };
 
-    const handleUpdate = (id) =>{
-        fetch(`https://murmuring-island-34247.herokuapp.com/updateStatus/${id}`,{
-            method: 'PUT',
-            headers:{
-               'content-type': 'application/json'    
-            },
-            body: JSON.stringify(update)
-        })
-        .then(res => res.json())
-        .then(data => {
-            if( data.modifiedCount > 0){
-                alert('approved successfully')
-                setApproved(!approved)
-            }
-        })
-    }
+  const handleUpdate = (id) => {
+    fetch(`http://localhost:5000/updateStatus/${id}`, {
+      method: 'PUT', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ status: 'Approved' }),
+    })
+      .then((r) => { if (!r.ok) throw new Error('api'); return r.json(); })
+      .catch(() => local((all) => all.map((b) => (b._id === id ? { ...b, status: 'Approved' } : b))))
+      .finally(() => setApproved((a) => !a));
+  };
 
-    return (
-        <div>
-            <h2>All Orders : {allOrders?.length}</h2>
-            <div className="table-responsive">
-             <Table striped bordered hover variant="dark">
-            <thead>
-                <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Car Name</th>
-                <th>Car Price</th>
-                <th>Status</th>
-                <th colSpan="2">Action</th>
-                </tr>
-            </thead>
-            {
-                allOrders?.map(order => 
-                <tbody key={order._id}>
-                    <tr>
-                    <td>{order?.displayName}</td>
-                    <td>{order?.email}</td>
-                    <td>{order?.phone}</td>
-                    <td>{order?.carName}</td>
-                    <td>{order?.carPrice}</td>
-                    <td>{order?.status}</td>
-                    <td><Button variant="danger" onClick={()=> handleDeleteOrder(order?._id)}>Delete</Button></td>
-                    <td><Button variant="success" onClick={()=> handleUpdate(order?._id)}>Confirm</Button></td>
-                    </tr>
-                </tbody>)
-            }
-        </Table> 
-             </div>
-        </div>
-    );
+  return (
+    <AdminPage title="Manage Orders" subtitle={`${allOrders.length} order${allOrders.length === 1 ? '' : 's'} across all customers`}>
+      <div className="ad-table-wrap">
+        <table className="ad-table">
+          <thead><tr><th>Customer</th><th>Phone</th><th>Car</th><th>Price</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody>
+            {allOrders.length === 0 ? (
+              <tr><td colSpan="6"><div className="ad-empty"><span className="ic">📋</span>No orders yet.</div></td></tr>
+            ) : allOrders.map((o) => (
+              <tr key={o._id}>
+                <td><b>{o.displayName}</b><br /><span style={{ color: '#8b93a3', fontSize: '.8rem' }}>{o.email}</span></td>
+                <td>{o.phone}</td>
+                <td>{o.carName}</td>
+                <td>${Number(o.carPrice || 0).toLocaleString()}</td>
+                <td><span className={`ad-pill ${o.status === 'Approved' ? 'approved' : 'pending'}`}>{o.status}</span></td>
+                <td style={{ display: 'flex', gap: 8 }}>
+                  <button className="cb-btn cb-btn-amber" style={{ padding: '7px 14px', fontSize: '.8rem' }} onClick={() => handleUpdate(o._id)}>Confirm</button>
+                  <button className="cb-btn cb-btn-dark" style={{ padding: '7px 14px', fontSize: '.8rem' }} onClick={() => handleDeleteOrder(o._id)}>Delete</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </AdminPage>
+  );
 };
 
 export default ManageOrders;

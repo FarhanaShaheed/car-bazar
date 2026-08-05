@@ -1,35 +1,39 @@
 import React from 'react';
-/* import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelopeOpen } from '@fortawesome/free-solid-svg-icons'*/
-import './Footer.css'; 
+import { Link } from 'react-router-dom';
+import './Footer.css';
 
 const Footer = () => {
-    return (
-        <div className="custom-footer">
-            <div className="row">
-             <div className="col-sm-4">
-                 <h4>Phone Support</h4>
-                 <p>24 HOURS A DAY</p>
-                 <h4>+01 345 97637</h4>
-             </div>
-             <div className="col-sm-4">
-                 <h4>Connect Wth Us</h4>
-                 <p>SOCIAL MEDIA CHANNELS</p>
-                 <i class="fab fa-facebook-square"></i> <i class="fab fa-google-plus-square"></i> <i class="fab fa-twitter-square"></i> <i class="fab fa-instagram-square"></i>
-                 
-
-             </div>
-             <div className="col-sm-4">
-                 <h4>NEWSTELLER</h4>
-                 <p>SIGN UP FOR SPECIAL OFFERS</p>
-                 <p>&copy; 2021 farhana15-734@diu.edu.bd</p>
-             </div>
+  return (
+    <footer className="cb-footer">
+      <div className="cb-wrap">
+        <div className="cb-footer-grid">
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, color: '#fff', fontWeight: 800, fontSize: '1.1rem', marginBottom: 12 }}>
+              <span className="cb-logo"><i className="fas fa-car" /></span> Car Bazar
+            </div>
+            <p style={{ fontSize: '.9rem', lineHeight: 1.7 }}>
+              Certified used cars with honest pricing, full inspection reports and
+              instant online booking.
+            </p>
+          </div>
+          <div>
+            <h5>Explore</h5>
+            <Link to="/morecars">Browse cars</Link>
+            <Link to="/login">Login</Link>
+            <Link to="/register">Register</Link>
+          </div>
+          <div>
+            <h5>Support</h5>
+            <a href="tel:+0134597637">24/7 phone: +01 345 97637</a>
+            <span style={{ fontSize: '.9rem', color: '#79839a' }}>
+              <i className="fab fa-facebook-square" /> <i className="fab fa-twitter-square" /> <i className="fab fa-instagram-square" />
+            </span>
+          </div>
         </div>
-        </div>
-    );
+        <div className="cb-footer-bottom">© {new Date().getFullYear()} Car Bazar · Built by Farhana Binta Shaheed</div>
+      </div>
+    </footer>
+  );
 };
 
 export default Footer;
-
-//<p>Travel Booking System</p>
-//<p>&copy; 2021 farhana15-734@diu.edu.bd</p>

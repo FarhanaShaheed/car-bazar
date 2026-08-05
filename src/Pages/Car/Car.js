@@ -1,28 +1,23 @@
 import React from 'react';
-import { Card, Col, Container, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import '../Car/Car.css';
 
-const Car = ({car}) => {
-    const {name,img,_id,price,condition} = car;
-    return (
-        <Container>
-           <Col>
-     <Card className="service-card">
-       <Card.Img variant="top" src={img} style={{height:'20rem'}}  fluid/>
-       <Card.Body>
-         <Card.Title className="card-title"><i class="fas fa-user"></i> {name}</Card.Title>
-         <Card.Title className="card-title"><i class="fas fa-money-bill-alt"></i> $ {price}</Card.Title>
-         
-         <Card.Text>Condition: <b>{condition}</b></Card.Text>
-         <Link to={`/booking/${_id}`}>
-         <Button variant="dark">Book Here </Button>
-         </Link>
-         </Card.Body>
-     </Card>
-   </Col>
-        </Container>
-    );
+const Car = ({ car }) => {
+  const { name, img, _id, price, condition, description } = car;
+  return (
+    <div className="cb-card">
+      <img className="cb-card-img" src={img} alt={name} />
+      <div className="cb-card-body">
+        <h3 className="cb-card-title">{name}</h3>
+        <span className="cb-cond">{condition}</span>
+        {description && <p className="cb-desc">{description}</p>}
+        <div className="cb-price-row">
+          <div className="cb-price">${Number(price).toLocaleString()}<small> incl. checks</small></div>
+          <Link to={`/booking/${_id}`} className="cb-btn cb-btn-amber" style={{ padding: '10px 18px', fontSize: '.86rem' }}>Book</Link>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default Car;

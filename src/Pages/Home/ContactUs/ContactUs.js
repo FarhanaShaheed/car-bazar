@@ -6,8 +6,8 @@ import '../ContactUs/ContactUs.css';
 const ContactUs = () => {
     return (
         <div>
-            <h2 className="mt-5">Contact Us</h2>
-            <Container className="contact-class">
+            
+            <Container className="contact-class cb-contact cb-section"><div className="cb-center"><span className="cb-eyebrow">Get in touch</span><h2 className="cb-h2">Contact Us</h2></div>
         <Row className="m-5">
         <Col xs={12} md={6}>
          <form action="">

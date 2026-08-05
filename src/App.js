@@ -1,5 +1,5 @@
+import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Home from './Pages/Home/Home/Home/Home';
 import MoreCars from './Pages/MoreCars/MoreCars';
@@ -12,6 +12,16 @@ import PrivateRoute from './Pages/Login/PrivateRoute/PrivateRoute';
 import Dashboard from './Pages/DashBoard/DashBoard/Dashboard';
 
 function App() {
+  // scroll-reveal: mark section children and reveal on intersect
+  React.useEffect(() => {
+    const els = document.querySelectorAll('.cb-section .cb-wrap, .cb-3d .cb-wrap');
+    els.forEach((el) => el.classList.add('cb-reveal'));
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((en) => { if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); } });
+    }, { threshold: 0.12 });
+    els.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  });
   return (
     <div className="App">
       <AuthProvider>

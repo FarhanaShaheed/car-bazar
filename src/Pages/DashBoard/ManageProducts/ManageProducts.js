@@ -1,62 +1,48 @@
-import React, { useEffect } from 'react';
-import { useState } from 'react';
-import { Table, Button } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { AdminPage } from '../ui/AdminUI';
 
 const ManageProducts = () => {
-    const [allProducts,setAllProducts] = useState();
-    useEffect(() =>{
-        fetch('https://murmuring-island-34247.herokuapp.com/cars')
-        .then(res => res.json())
-        .then(data => setAllProducts(data))
-    },[])
+  const [allProducts, setAllProducts] = useState([]);
 
-    //DELETE A PRODUCT
-    const handleDeleteProducts = id =>{
-        const proceed = window.confirm('Are You sure you want to delete?');
-        if(proceed){
-          const url = `https://murmuring-island-34247.herokuapp.com/cars/${id}`;
-          fetch(url,{
-              method: 'DELETE'
-          })
-          .then(res=>res.json())
-          .then(data =>{
-              if(data.deletedCount >0){
-                  alert('Deleted Successfully');
-                  const remainingOrders = allProducts.filter(product => product._id !== id);
-                  setAllProducts(remainingOrders);
-              }
-          });
-        }
-      }
-    return (
-        <div>
-            <h2>All Products:{allProducts?.length}</h2>
-            <div className="table-responsive">
-             <Table striped bordered hover variant="dark">
-            <thead>
-                <tr>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Condition</th>
-                <th>Action</th>
-                </tr>
-            </thead>
-            {
-                allProducts?.map(products => 
-                <tbody key={products._id}>
-                    <tr>
-                    <td>{products?.name}</td>
-                    <td>{products?.price}</td>
-                    <td>{products?.condition}</td>
-                    <td><Button variant="danger" onClick={()=> handleDeleteProducts(products._id)}>Delete</Button></td>
-                    
-                    </tr>
-                </tbody>)
-            }
-        </Table> 
-             </div>
-        </div>
-    );
+  useEffect(() => {
+    fetch('http://localhost:5000/cars')
+      .then((res) => { if (!res.ok) throw new Error('api'); return res.json(); })
+      .then(setAllProducts)
+      .catch(() => fetch(process.env.PUBLIC_URL + '/cars.json').then((r) => r.json()).then(setAllProducts).catch(() => setAllProducts([])));
+  }, []);
+
+  const handleDeleteProducts = (id) => {
+    if (!window.confirm('Remove this car from the inventory?')) return;
+    fetch(`http://localhost:5000/cars/${id}`, { method: 'DELETE' })
+      .then((r) => { if (!r.ok) throw new Error('api'); return r.json(); })
+      .catch(() => {})
+      .finally(() => setAllProducts((p) => p.filter((x) => x._id !== id)));
+  };
+
+  return (
+    <AdminPage title="Manage Products" subtitle={`${allProducts.length} cars in the inventory`}>
+      <div className="ad-table-wrap">
+        <table className="ad-table">
+          <thead><tr><th>Car</th><th>Price</th><th>Condition</th><th>Action</th></tr></thead>
+          <tbody>
+            {allProducts.length === 0 ? (
+              <tr><td colSpan="4"><div className="ad-empty"><span className="ic">📦</span>No cars in the inventory.</div></td></tr>
+            ) : allProducts.map((p) => (
+              <tr key={p._id}>
+                <td style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                  {p.img && <img src={p.img} alt={p.name} style={{ width: 54, height: 38, objectFit: 'cover', borderRadius: 8 }} />}
+                  <b>{p.name}</b>
+                </td>
+                <td>${Number(p.price || 0).toLocaleString()}</td>
+                <td><span className="ad-pill approved">{p.condition}</span></td>
+                <td><button className="cb-btn cb-btn-dark" style={{ padding: '7px 14px', fontSize: '.8rem' }} onClick={() => handleDeleteProducts(p._id)}>Delete</button></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </AdminPage>
+  );
 };
 
 export default ManageProducts;

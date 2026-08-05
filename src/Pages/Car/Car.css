@@ -1,9 +1,1 @@
-.service-card {
-    border-radius: 5px;
-    border: 1px solid black;
-}
-
-.service-card:hover {
-    background-color: black;
-    color: white;
-}
+/* superseded by 2026 design system (index.css) */

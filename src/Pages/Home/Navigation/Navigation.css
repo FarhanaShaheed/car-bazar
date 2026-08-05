@@ -1,11 +1,1 @@
-.custom-class {
-    display: flex;
-    flex-direction: row;
-}
-
-@media only screen and (max-width: 600px) {
-    .custom-class {
-        display: flex;
-        flex-direction: column;
-    }
-}
+/* superseded by 2026 design system (index.css) */

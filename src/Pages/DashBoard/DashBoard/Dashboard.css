@@ -1,18 +1,1 @@
-.side-nav {
-    background-color: gray;
-    height: 100vh;
-
-}
-
-.nav-link {
-    color: black;
-}
-
-.dashboard {
-    background-color: black;
-    color: blanchedalmond;
-}
-
-.pd-reduce {
-    padding-left: 0 !important;
-}
+/* superseded by the admin design system in src/index.css */

@@ -1,0 +1,6 @@
+[
+  {"_id":"r1","name":"Jonas Weber","email":"jonas@example.com","opinion":"Fantastic buying experience — transparent pricing and the car was exactly as described.","rating":5},
+  {"_id":"r2","name":"Amelie Fischer","email":"amelie@example.com","opinion":"Booked online in minutes. Friendly team and great after-sales support.","rating":5},
+  {"_id":"r3","name":"Karim Said","email":"karim@example.com","opinion":"Good selection of certified cars. The inspection report gave me real confidence.","rating":4},
+  {"_id":"r4","name":"Lena Hoffmann","email":"lena@example.com","opinion":"Smooth trade-in and financing. Would absolutely recommend Car Bazar.","rating":5}
+]

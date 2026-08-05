@@ -7,8 +7,7 @@ const firebaseConfig = {
     appId: process.env.REACT_APP_FIREBASE_APP_ID,
   };
 
-  export default firebaseConfig;
+// Demo mode: true when no Firebase keys are configured (e.g. public demo deploy).
+export const isFirebaseConfigured = Boolean(firebaseConfig.apiKey);
 
-  
-
-  
+export default firebaseConfig;

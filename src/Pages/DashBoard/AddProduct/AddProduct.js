@@ -1,44 +1,47 @@
-import React from 'react';
-import { useForm } from "react-hook-form";
-import '../AddReviews/AddReviews.css';
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { AdminPage } from '../ui/AdminUI';
 
 const AddProduct = () => {
-    const { register, handleSubmit,reset } = useForm();
-  const onSubmit = data =>{
-       console.log(data);
-       fetch('https://murmuring-island-34247.herokuapp.com/cars',{
-           method: 'POST',
-           headers:{
-            'content-type': 'application/json'
-           },
-           body: JSON.stringify(data)
-       })
-       .then(res => res.json())
-       .then(data =>{
-        if(data.insertedId){
-          alert('Product added successfully');
-          reset();
-        }
-    })
-    }
+  const { register, handleSubmit, reset } = useForm();
+  const [ok, setOk] = useState(false);
 
-    return (
-        <div className="reviews-form">
-            <h2>Add A Product</h2>
-            <form onSubmit={handleSubmit(onSubmit)}>
-      <input {...register("name")} placeholder="Product Name"/>
-      <br />
-      <input {...register("img")} placeholder="Product Img URL"/>
-      <br />
-      <input type="number" {...register("price")} placeholder="Product Price"/>
-      <br />
-      <input {...register("condition")} placeholder="Product Condition(New/Used)"/>
-      <br />
-      <input className="reviews-submit" type="submit" />
-    </form>
-            
-        </div>
-    );
+  const onSubmit = (data) => {
+    const car = { ...data, _id: 'c' + Date.now() };
+    fetch('http://localhost:5000/cars', {
+      method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(car),
+    })
+      .then((r) => { if (!r.ok) throw new Error('api'); return r.json(); })
+      .catch(() => {
+        try {
+          const all = JSON.parse(localStorage.getItem('cb_demo_cars') || '[]');
+          all.push(car); localStorage.setItem('cb_demo_cars', JSON.stringify(all));
+        } catch (e) {}
+      })
+      .finally(() => { setOk(true); reset(); setTimeout(() => setOk(false), 4000); });
+  };
+
+  return (
+    <AdminPage title="Add a Product" subtitle="List a new car in the showroom inventory">
+      <div className="ad-panel" style={{ maxWidth: 620 }}>
+        <div className="ad-note">💡 Demo mode: new cars are stored in your browser so you can see the flow end-to-end.</div>
+        <form className="ad-form" onSubmit={handleSubmit(onSubmit)}>
+          <label>Car name</label>
+          <input {...register('name')} placeholder="e.g. BMW 3 Series (2021)" required />
+          <label>Image URL</label>
+          <input {...register('img')} placeholder="https://…" />
+          <label>Price (USD)</label>
+          <input type="number" {...register('price')} placeholder="32900" required />
+          <label>Condition</label>
+          <input {...register('condition')} placeholder="Excellent / Very good / Like new" />
+          <label>Short description</label>
+          <textarea rows="3" {...register('description')} placeholder="One owner, full service history, 28.000 km." />
+          <button className="cb-btn cb-btn-amber" type="submit"><i className="fas fa-plus" /> Add car</button>
+          {ok && <div className="ad-ok">✅ Car added to the inventory.</div>}
+        </form>
+      </div>
+    </AdminPage>
+  );
 };
 
 export default AddProduct;

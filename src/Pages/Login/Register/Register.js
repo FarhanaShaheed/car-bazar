@@ -1,94 +1,52 @@
 import React, { useState } from 'react';
-import { Button, Col, Form, Image, Container, Row, Spinner, Alert } from 'react-bootstrap';
-import { Link,useHistory } from 'react-router-dom';
-import login from '../../images/login.jfif';
+import { Link, useHistory } from 'react-router-dom';
 import useAuth from './../../../hooks/useAuth';
+import Navigation from '../../Home/Navigation/Navigation';
 
 const Register = () => {
+  const [loginData, setLoginData] = useState({});
+  const { registerUser, isLoading, authError } = useAuth();
+  const history = useHistory();
 
-    const[loginData, setLoginData] = useState({});
-    const{user,registerUser,isLoading,authError} = useAuth();
-    const history = useHistory();
+  const handleOnBlur = (e) => {
+    const newLoginData = { ...loginData };
+    newLoginData[e.target.name] = e.target.value;
+    setLoginData(newLoginData);
+  };
 
-    const handleOnBlur = e =>{
-        const field = e.target.name;
-        const value = e.target.value;
-        const newLoginData = {...loginData};
-        newLoginData[field] = value;
-        console.log(newLoginData);
-        setLoginData(newLoginData);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (loginData.password !== loginData.password2) {
+      alert('Your passwords did not match');
+      return;
     }
-    const handleLoginSubmit = e =>{
-        if(loginData.password !== loginData.password2){
-            alert("your password did not match");
-            return;
-        }
-         registerUser(loginData.email, loginData.password,loginData.name,history); 
-        e.preventDefault();
-   }
-    return (
-        <div>
-        <Container className="mt-5">
-        <Row>
-        <Col xs={12} md={6} className="mt-5">
-            <h2>You Can Register Here</h2>
-        {!isLoading && <Form onSubmit={handleLoginSubmit}>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Your Name</Form.Label>
-                <Form.Control 
-                type="text" 
-                name="name"
-                required
-                onBlur={handleOnBlur}
-                placeholder="Enter Name" />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Email address</Form.Label>
-                <Form.Control 
-                type="email" 
-                name="email"
-                onBlur={handleOnBlur}
-                placeholder="Enter email" />
-            </Form.Group>
+    registerUser(loginData.email, loginData.password, loginData.name, history);
+  };
 
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Label>Password</Form.Label>
-                <Form.Control
-                 type="password"
-                 name="password"
-                 onBlur={handleOnBlur}
-                 placeholder="Password"/>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Label>ReType Your Password</Form.Label>
-                <Form.Control
-                 type="password"
-                 name="password2"
-                 onBlur={handleOnBlur}
-                 placeholder="Password"/>
-            </Form.Group>
-            
-            <Button variant="dark" type="submit">
-                Register
-            </Button>
-            </Form>}
-            {isLoading && <Spinner animation="grow" />}
-            {user?.email && <Alert variant="success">
-             Registartion is successfull !!
-             </Alert> }
-            {authError && <Alert variant="danger">
-             {authError}
-             </Alert> }
-
-          <p className="mt-3">Already Registered? Please <Link to="/login">Login</Link></p>
-        </Col>
-        <Col xs={12} md={6}>
-          <Image src={login} fluid></Image>
-        </Col>
-      </Row>
-        </Container>
-    </div>
-    );
+  return (
+    <>
+      <Navigation />
+      <div className="cb-auth">
+        <div className="cb-auth-card">
+          <h2>Create your account</h2>
+          <p className="sub">Book faster and keep your orders in one place.</p>
+          <form onSubmit={handleSubmit}>
+            <input type="text" name="name" placeholder="Full name" onBlur={handleOnBlur} required />
+            <input type="email" name="email" placeholder="Email address" onBlur={handleOnBlur} required />
+            <input type="password" name="password" placeholder="Password" onBlur={handleOnBlur} required />
+            <input type="password" name="password2" placeholder="Repeat password" onBlur={handleOnBlur} required />
+            {authError && <div className="cb-error">{authError}</div>}
+            <button type="submit" className="cb-btn cb-btn-amber" style={{ width: '100%', justifyContent: 'center', marginTop: 6 }} disabled={isLoading}>
+              {isLoading ? 'Creating…' : 'Create account'}
+            </button>
+          </form>
+          <p style={{ marginTop: 18, fontSize: '.9rem' }}>
+            Already registered? <Link to="/login" style={{ color: 'var(--amber-dark)', fontWeight: 700 }}>Log in</Link>
+          </p>
+        </div>
+      </div>
+    </>
+  );
 };
 
 export default Register;

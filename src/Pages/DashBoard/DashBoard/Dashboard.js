@@ -1,13 +1,7 @@
 import React from 'react';
-import { Button, Col, Row } from 'react-bootstrap';
 import '../DashBoard/Dashboard.css';
 import DashboardHome from './../DashboardHome/DashboardHome';
-import{
-    Switch,
-    Route,
-    Link,
-    useRouteMatch
-  } from "react-router-dom";
+import { Switch, Route, Link, useRouteMatch, useLocation } from 'react-router-dom';
 import MakeAdmin from '../MakeAdmin/MakeAdmin';
 import AddProduct from './../AddProduct/AddProduct';
 import ManageProducts from './../ManageProducts/ManageProducts';
@@ -19,66 +13,69 @@ import AddReviews from './../AddReviews/AddReviews';
 import AdminRoute from './../../Login/AdminRoute/AdminRoute';
 
 const Dashboard = () => {
-    let { path, url } = useRouteMatch();
-    const{logout,admin} = useAuth();
+  const { path, url } = useRouteMatch();
+  const { logout, admin, user } = useAuth();
+  const loc = useLocation();
+  const is = (p) => (loc.pathname === p ? 'ad-navlink active' : 'ad-navlink');
+  const initial = (user?.displayName || user?.email || 'U').charAt(0).toUpperCase();
 
-    return (
-        <div>
-            <Row>
-                <Col className="side-nav" sm={3}>
-                    <h2 className="m-4">More Options</h2>
-                    <Link className="nav-link" to="/home">Home</Link>
-                    <Link  className="nav-link" to={`${url}`}>Dashboard</Link>
-                    {admin ? <div>
-                    <Link  className="nav-link" to={`${url}/makeAdmin`}>Make Admin</Link>
-                    <Link  className="nav-link" to={`${url}/addProduct`}>Add Product</Link>
-                    <Link  className="nav-link" to={`${url}/manageProducts`}>Manage Products</Link>
-                    <Link  className="nav-link" to={`${url}/manageOrders`}>Manage Orders</Link>  
-                    </div> : 
-                    <div>
-                        <Link  className="nav-link" to={`${url}/payment`}>Payment</Link>
-                        <Link  className="nav-link" to={`${url}/myOrders`}>My Orders</Link>
-                        <Link  className="nav-link" to={`${url}/addreviews`}>Add Reviews</Link>
-                    </div>
-                    }
-                    <Button className="mt-3" variant="dark" onClick={logout}>Logout</Button>
-                </Col>
-            
-            
-            <Col className="pd-reduce" sm={9}>
-                <h2 className="dashboard">DashBoard</h2>
-            <Switch>
-                    <Route exact path={path}>
-                    <DashboardHome></DashboardHome>
-                    </Route>
-                    <AdminRoute path={`${path}/makeAdmin`}>
-                    <MakeAdmin></MakeAdmin>
-                    </AdminRoute>
-                    <AdminRoute path={`${path}/addProduct`}>
-                    <AddProduct></AddProduct>
-                    </AdminRoute>
-                    <AdminRoute path={`${path}/manageProducts`}>
-                    <ManageProducts></ManageProducts>
-                    </AdminRoute>
-                    <AdminRoute path={`${path}/manageOrders`}>
-                    <ManageOrders></ManageOrders>
-                    </AdminRoute>
-                    <Route path={`${path}/payment`}>
-                    <Payment></Payment>
-                    </Route>
-                    <Route path={`${path}/myOrders`}>
-                    <MyOrders></MyOrders>
-                    </Route>
-                    <Route path={`${path}/addreviews`}>
-                     <AddReviews></AddReviews>
-                    </Route>
-                </Switch>
-                </Col>
-            </Row>
-                
-            
+  return (
+    <div className="ad-shell">
+      <aside className="ad-side">
+        <div className="ad-brand"><span className="cb-logo"><i className="fas fa-car" /></span> Car Bazar</div>
+
+        <div className="ad-sect">Overview</div>
+        <Link className={is(url)} to={`${url}`}><i className="fas fa-chart-line" /> Dashboard</Link>
+        <Link className="ad-navlink" to="/home"><i className="fas fa-store" /> Back to shop</Link>
+
+        <div className="ad-sect">My account</div>
+        <Link className={is(`${url}/myOrders`)} to={`${url}/myOrders`}><i className="fas fa-receipt" /> My Orders</Link>
+        <Link className={is(`${url}/addreviews`)} to={`${url}/addreviews`}><i className="fas fa-star" /> Add Review</Link>
+        <Link className={is(`${url}/payment`)} to={`${url}/payment`}><i className="fas fa-credit-card" /> Payment</Link>
+
+        {admin && (
+          <>
+            <div className="ad-sect">Administration</div>
+            <Link className={is(`${url}/manageOrders`)} to={`${url}/manageOrders`}><i className="fas fa-tasks" /> Manage Orders</Link>
+            <Link className={is(`${url}/manageProducts`)} to={`${url}/manageProducts`}><i className="fas fa-boxes" /> Manage Products</Link>
+            <Link className={is(`${url}/addProduct`)} to={`${url}/addProduct`}><i className="fas fa-plus-circle" /> Add Product</Link>
+            <Link className={is(`${url}/makeAdmin`)} to={`${url}/makeAdmin`}><i className="fas fa-user-shield" /> Make Admin</Link>
+          </>
+        )}
+
+        <button className="cb-btn cb-btn-amber" style={{ width: '100%', justifyContent: 'center', marginTop: 22 }} onClick={logout}>
+          <i className="fas fa-sign-out-alt" /> Logout
+        </button>
+      </aside>
+
+      <main className="ad-main">
+        <header className="ad-top">
+          <div>
+            <h1>Dashboard</h1>
+            <div className="sub">Welcome back, {user?.displayName || 'there'} 👋</div>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+            <span className="ad-chip">DEMO MODE</span>
+            <div className="ad-user"><span className="ad-avatar">{initial}</span>
+              <span style={{ display: 'none' }} className="d-sm-inline">{user?.displayName}</span></div>
+          </div>
+        </header>
+
+        <div className="ad-body">
+          <Switch>
+            <Route exact path={path}><DashboardHome /></Route>
+            <AdminRoute path={`${path}/makeAdmin`}><MakeAdmin /></AdminRoute>
+            <AdminRoute path={`${path}/addProduct`}><AddProduct /></AdminRoute>
+            <AdminRoute path={`${path}/manageProducts`}><ManageProducts /></AdminRoute>
+            <AdminRoute path={`${path}/manageOrders`}><ManageOrders /></AdminRoute>
+            <Route path={`${path}/payment`}><Payment /></Route>
+            <Route path={`${path}/myOrders`}><MyOrders /></Route>
+            <Route path={`${path}/addreviews`}><AddReviews /></Route>
+          </Switch>
         </div>
-    );
+      </main>
+    </div>
+  );
 };
 
 export default Dashboard;

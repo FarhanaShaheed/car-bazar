@@ -4,6 +4,7 @@ import Banner from '../../Banner/Banner';
 import ContactUs from '../../ContactUs/ContactUs';
 import Navigation from '../../Navigation/Navigation';
 import Reviews from '../../Reviews/Reviews';
+import Showroom3D from '../../Showroom3D/Showroom3D';
 import PopularCars from '../PopularCars/PopularCars';
 
 const Home = () => {
@@ -12,6 +13,7 @@ const Home = () => {
             <Navigation></Navigation>
             <Banner></Banner>
             <PopularCars></PopularCars>
+            <Showroom3D></Showroom3D>
             <Reviews></Reviews>
             <ContactUs></ContactUs>
             <Footer></Footer>
