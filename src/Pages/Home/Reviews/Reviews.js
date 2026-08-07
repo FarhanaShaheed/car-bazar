@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import Review from './../Review/Review';
+import loadReviews from '../../../utils/reviewsSource';
 
 const Reviews = () => {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:5000/reviews')
-      .then((res) => { if (!res.ok) throw new Error('api'); return res.json(); })
-      .catch(() => fetch(process.env.PUBLIC_URL + '/reviews.json').then((r) => r.json()))
-      .then((data) => setReviews(data))
-      .catch(() => setReviews([]));
+    loadReviews().then(setReviews);
   }, []);
 
   return (

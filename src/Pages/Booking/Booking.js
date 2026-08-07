@@ -76,11 +76,11 @@ const Booking = () => {
                 <p className="sub">Confirm your details — we'll get back within 24h.</p>
                 <form onSubmit={submit}>
                   <input type="text" name="displayName" defaultValue={user.displayName} placeholder="Your name" required
-                    onBlur={(e) => setInfo({ ...info, displayName: e.target.value })} />
+                    onChange={(e) => setInfo({ ...info, displayName: e.target.value })} />
                   <input type="email" name="email" defaultValue={user.email} placeholder="Your email" required
-                    onBlur={(e) => setInfo({ ...info, email: e.target.value })} />
+                    onChange={(e) => setInfo({ ...info, email: e.target.value })} />
                   <input type="tel" name="phone" placeholder="Phone number" required
-                    onBlur={(e) => setInfo({ ...info, phone: e.target.value })} />
+                    onChange={(e) => setInfo({ ...info, phone: e.target.value })} />
                   <button type="submit" className="cb-btn cb-btn-amber" style={{ width: '100%', justifyContent: 'center' }}>
                     Confirm booking
                   </button>

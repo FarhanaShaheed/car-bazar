@@ -22,7 +22,7 @@ const MakeAdmin = () => {
         <div className="ad-note">🔐 Admin rights let a user manage inventory and confirm customer orders.</div>
         <form className="ad-form" onSubmit={handleAdminSubmit}>
           <label>User email</label>
-          <input type="email" placeholder="name@example.com" onBlur={(e) => setEmail(e.target.value)} required />
+          <input type="email" placeholder="name@example.com" onChange={(e) => setEmail(e.target.value)} required />
           <button className="cb-btn cb-btn-amber" type="submit"><i className="fas fa-user-shield" /> Make admin</button>
           {ok && <div className="ad-ok">✅ {email} is now an administrator.</div>}
         </form>

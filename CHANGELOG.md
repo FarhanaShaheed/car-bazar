@@ -2,6 +2,19 @@
 
 All notable changes to Car Bazar. Format loosely follows Keep a Changelog.
 
+## [2.5.0] — 2026-08-07 — README requirements audited & closed
+### Fixed
+- **Reviews never reached the home page.** `AddReviews` wrote to `cb_demo_reviews`
+  but the home section only read `public/reviews.json`, so the README's "review shows
+  dynamically in the home page" did not hold in demo mode. Added
+  `src/utils/reviewsSource.js` (API → seed + demo reviews, newest first).
+- **Forms captured values on blur**, so submitting straight from the last field
+  (Enter key) used stale state — registering that way always said "Your passwords did
+  not match". Register, Login, Booking and Make Admin now use `onChange`.
+### Changed
+- Review rating is a **5-star picker** (hover preview, keyboard-reachable, defaults to
+  5) instead of a number to type.
+
 ## [2.4.0] — 2026-08-07 — Condition is now a picker
 ### Changed
 - **Add Product → Condition** is a set of selectable option cards (Like new /

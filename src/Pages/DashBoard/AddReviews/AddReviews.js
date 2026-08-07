@@ -4,9 +4,11 @@ import useAuth from '../../../hooks/useAuth';
 import { AdminPage } from '../ui/AdminUI';
 
 const AddReviews = () => {
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit, reset, setValue, watch } = useForm({ defaultValues: { rating: 5 } });
   const { user } = useAuth();
   const [ok, setOk] = useState(false);
+  const [hover, setHover] = useState(0);
+  const rating = Number(watch('rating')) || 0;
 
   const onSubmit = (data) => {
     const review = { ...data, _id: 'r' + Date.now() };
@@ -33,8 +35,25 @@ const AddReviews = () => {
           <input type="email" {...register('email')} defaultValue={user.email} required />
           <label>Your opinion</label>
           <textarea rows="4" {...register('opinion')} placeholder="What did you think of the service?" required />
-          <label>Rating (0–5)</label>
-          <input type="number" step="0.5" min="0" max="5" {...register('rating', { min: 0, max: 5 })} placeholder="5" />
+          <label id="rating-label">Rating</label>
+          <div className="ad-stars" role="radiogroup" aria-labelledby="rating-label" onMouseLeave={() => setHover(0)}>
+            {[1, 2, 3, 4, 5].map((n) => (
+              <button
+                type="button"
+                key={n}
+                className={`ad-star${n <= (hover || rating) ? ' is-on' : ''}`}
+                onClick={() => setValue('rating', n, { shouldDirty: true })}
+                onMouseEnter={() => setHover(n)}
+                aria-label={`${n} star${n === 1 ? '' : 's'}`}
+                aria-checked={n === rating}
+                role="radio"
+              >
+                <i className="fas fa-star" />
+              </button>
+            ))}
+            <span className="ad-stars-val">{hover || rating} / 5</span>
+          </div>
+          <input type="hidden" {...register('rating')} />
           <button className="cb-btn cb-btn-amber" type="submit"><i className="fas fa-star" /> Submit review</button>
           {ok && <div className="ad-ok">✅ Thanks! Your review was submitted.</div>}
         </form>

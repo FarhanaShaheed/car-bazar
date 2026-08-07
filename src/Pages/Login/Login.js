@@ -9,7 +9,7 @@ const Login = () => {
   const location = useLocation();
   const history = useHistory();
 
-  const handleOnBlur = (e) => {
+  const handleChange = (e) => {
     const newLoginData = { ...loginData };
     newLoginData[e.target.name] = e.target.value;
     setLoginData(newLoginData);
@@ -23,8 +23,8 @@ const Login = () => {
           <h2>Welcome back</h2>
           <p className="sub">Log in to book cars and manage your orders. <b>Demo tip:</b> any email + password works.</p>
           <form onSubmit={(e) => { e.preventDefault(); loginUser(loginData.email, loginData.password, location, history); }}>
-            <input type="email" name="email" placeholder="Email address" onBlur={handleOnBlur} required />
-            <input type="password" name="password" placeholder="Password" onBlur={handleOnBlur} required />
+            <input type="email" name="email" placeholder="Email address" onChange={handleChange} required />
+            <input type="password" name="password" placeholder="Password" onChange={handleChange} required />
             {authError && <div className="cb-error">{authError}</div>}
             <button type="submit" className="cb-btn cb-btn-amber" style={{ width: '100%', justifyContent: 'center', marginTop: 6 }} disabled={isLoading}>
               {isLoading ? 'Logging in…' : 'Log in'}

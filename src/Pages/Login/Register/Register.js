@@ -8,7 +8,7 @@ const Register = () => {
   const { registerUser, isLoading, authError } = useAuth();
   const history = useHistory();
 
-  const handleOnBlur = (e) => {
+  const handleChange = (e) => {
     const newLoginData = { ...loginData };
     newLoginData[e.target.name] = e.target.value;
     setLoginData(newLoginData);
@@ -31,10 +31,10 @@ const Register = () => {
           <h2>Create your account</h2>
           <p className="sub">Book faster and keep your orders in one place.</p>
           <form onSubmit={handleSubmit}>
-            <input type="text" name="name" placeholder="Full name" onBlur={handleOnBlur} required />
-            <input type="email" name="email" placeholder="Email address" onBlur={handleOnBlur} required />
-            <input type="password" name="password" placeholder="Password" onBlur={handleOnBlur} required />
-            <input type="password" name="password2" placeholder="Repeat password" onBlur={handleOnBlur} required />
+            <input type="text" name="name" placeholder="Full name" onChange={handleChange} required />
+            <input type="email" name="email" placeholder="Email address" onChange={handleChange} required />
+            <input type="password" name="password" placeholder="Password" onChange={handleChange} required />
+            <input type="password" name="password2" placeholder="Repeat password" onChange={handleChange} required />
             {authError && <div className="cb-error">{authError}</div>}
             <button type="submit" className="cb-btn cb-btn-amber" style={{ width: '100%', justifyContent: 'center', marginTop: 6 }} disabled={isLoading}>
               {isLoading ? 'Creating…' : 'Create account'}
