@@ -39,6 +39,11 @@ the cascade). Tokens: deep ink `#0f1115` + amber `#ff9f1c`, Plus Jakarta Sans.
   `translateZ` floating badges).
 - **Admin panel:** `ad-*` classes + `src/Pages/DashBoard/ui/AdminUI.js`
   (`StatCard` with count-up + 3D tilt, animated SVG `LineChart`, CSS `BarChart`).
+- **Contact section:** `cb-ct-*` classes (end of `index.css`) +
+  `src/Pages/Home/ContactUs/ContactUs.js` — dark info rail + floating-label form with
+  topic chips, validation and a success state (writes to `cb_demo_messages` in
+  localStorage), then a tilt-on-hover map card with a pulsing pin. Below 720px the
+  map's floating info card becomes a static block so it stops covering the map.
 - Legacy per-component `.css` files were emptied on purpose — don't restore them.
 - All animation respects `prefers-reduced-motion`.
 

@@ -2,6 +2,23 @@
 
 All notable changes to Car Bazar. Format loosely follows Keep a Changelog.
 
+## [2.1.0] — 2026-08-07 — Contact section rebuilt
+### Added
+- **New contact experience** (`src/Pages/Home/ContactUs/ContactUs.js`, `cb-ct-*` styles
+  at the end of `src/index.css`): split shell with a dark info rail (live-status pill,
+  tappable call/email/showroom channels, opening hours, socials) and a white form panel.
+- Enquiry **topic chips** (Buy a car · Sell my car · Book a test drive · Support),
+  **floating-label** inputs, inline validation, sending state and an animated
+  success panel. Messages persist to `localStorage` under `cb_demo_messages`.
+- **Map card** with a pulsing location pin, gradient overlay, mouse-tilt 3D and a
+  "Get directions" link to Google Maps; the info card reflows below the map on phones.
+### Removed
+- Leftover hotel-template fields ("Check-In 15:00 am" / "Check-Out 11:00am") that made
+  no sense for a car marketplace.
+### Fixed
+- Contact copy overflowed the viewport on the left (bootstrap `Row.m-5` negative
+  margins) — the section is now a CSS grid with no horizontal overflow at 390px.
+
 ## [2.0.0] — 2026-08-05 — Full overhaul & relaunch
 ### Added
 - **Demo mode**: works with no backend/keys — dual-mode auth (`isFirebaseConfigured`),
