@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import banner from '../../images/banner.jfif';
+import loadCars from '../../../utils/carsSource';
 
 /* Hero — "search console" concept (2026).
    Full-bleed cinematic stage + a working inventory search that hands its
@@ -21,11 +22,7 @@ const Banner = () => {
   const [par, setPar] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
-    fetch('http://localhost:5000/cars')
-      .then((r) => { if (!r.ok) throw new Error('api'); return r.json(); })
-      .catch(() => fetch(process.env.PUBLIC_URL + '/cars.json').then((r) => r.json()))
-      .then((d) => Array.isArray(d) && setCars(d))
-      .catch(() => {});
+    loadCars().then(setCars);
   }, []);
 
   const makes = useMemo(

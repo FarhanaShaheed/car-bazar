@@ -4,6 +4,7 @@ import Navigation from '../Home/Navigation/Navigation';
 import Footer from '../Shared/Footer/Footer';
 import Pagination from '../Shared/Pagination/Pagination';
 import Car from './../Car/Car';
+import loadCars from '../../utils/carsSource';
 
 /* Inventory. Reads the hero's search filters from the query string
    (?make=&condition=&max=) so the homepage console actually does something. */
@@ -18,11 +19,7 @@ const MoreCars = () => {
   const { search } = useLocation();
 
   useEffect(() => {
-    fetch('http://localhost:5000/cars')
-      .then((res) => { if (!res.ok) throw new Error('api'); return res.json(); })
-      .catch(() => fetch(process.env.PUBLIC_URL + '/cars.json').then((r) => r.json()))
-      .then((data) => setCars(data))
-      .catch(() => setCars([]));
+    loadCars().then(setCars);
   }, []);
 
   const params = useMemo(() => new URLSearchParams(search), [search]);

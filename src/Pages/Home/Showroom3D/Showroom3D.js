@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import carImage from '../../../utils/carImage';
+import loadCars from '../../../utils/carsSource';
 
 /* 3D showroom — perspective mouse-tilt stage with floating chips + animated glow. */
 const Showroom3D = () => {
@@ -9,10 +10,7 @@ const Showroom3D = () => {
   const [car, setCar] = useState(null);
 
   useEffect(() => {
-    fetch(process.env.PUBLIC_URL + '/cars.json')
-      .then((r) => r.json())
-      .then((all) => setCar(all[4] || all[0]))
-      .catch(() => {});
+    loadCars().then((all) => setCar(all[4] || all[0]));
   }, []);
 
   const onMove = (e) => {

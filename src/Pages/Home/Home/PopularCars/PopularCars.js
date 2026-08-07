@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Car from '../../../Car/Car';
 import Pagination from '../../../Shared/Pagination/Pagination';
 import '../../Home/PopularCars/PopularCars.css';
+import loadCars from '../../../../utils/carsSource';
 
 const PER_PAGE = 6;
 
@@ -12,11 +13,7 @@ const PopularCars = () => {
   const gridRef = useRef(null);
 
   useEffect(() => {
-    fetch('http://localhost:5000/cars')
-      .then((res) => { if (!res.ok) throw new Error('api'); return res.json(); })
-      .catch(() => fetch(process.env.PUBLIC_URL + '/cars.json').then((r) => r.json()))
-      .then((data) => setCars(Array.isArray(data) ? data : []))
-      .catch(() => setCars([]));
+    loadCars().then(setCars);
   }, []);
 
   const shown = cars.slice((page - 1) * PER_PAGE, page * PER_PAGE);

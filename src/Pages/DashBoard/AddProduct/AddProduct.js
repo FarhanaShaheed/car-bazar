@@ -2,8 +2,18 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { AdminPage } from '../ui/AdminUI';
 
+/* Condition is a fixed vocabulary — the hero's condition filter groups on these
+   exact strings, so admins pick one instead of typing it (a typo would spawn a
+   one-car filter option). */
+const CONDITIONS = [
+  { value: 'Like new', hint: 'Almost no km' },
+  { value: 'Excellent', hint: 'No visible wear' },
+  { value: 'Very good', hint: 'Light cosmetic wear' },
+  { value: 'Good', hint: 'Higher mileage' },
+];
+
 const AddProduct = () => {
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit, reset } = useForm({ defaultValues: { condition: 'Excellent' } });
   const [ok, setOk] = useState(false);
 
   const onSubmit = (data) => {
@@ -32,8 +42,19 @@ const AddProduct = () => {
           <input {...register('img')} placeholder="https://…" />
           <label>Price (USD)</label>
           <input type="number" {...register('price')} placeholder="32900" required />
-          <label>Condition</label>
-          <input {...register('condition')} placeholder="Excellent / Very good / Like new" />
+          <label id="cond-label">Condition</label>
+          <div className="ad-choice" role="radiogroup" aria-labelledby="cond-label">
+            {CONDITIONS.map((c) => (
+              <label className="ad-choice-opt" key={c.value}>
+                <input type="radio" value={c.value} {...register('condition')} />
+                <span>
+                  <i className="fas fa-check" />
+                  <b>{c.value}</b>
+                  <em>{c.hint}</em>
+                </span>
+              </label>
+            ))}
+          </div>
           <label>Short description</label>
           <textarea rows="3" {...register('description')} placeholder="One owner, full service history, 28.000 km." />
           <button className="cb-btn cb-btn-amber" type="submit"><i className="fas fa-plus" /> Add car</button>

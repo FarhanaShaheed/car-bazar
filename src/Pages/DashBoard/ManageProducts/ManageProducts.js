@@ -1,22 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { AdminPage } from '../ui/AdminUI';
 import carImage from '../../../utils/carImage';
+import loadCars, { removeDemoCar } from '../../../utils/carsSource';
 
 const ManageProducts = () => {
   const [allProducts, setAllProducts] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:5000/cars')
-      .then((res) => { if (!res.ok) throw new Error('api'); return res.json(); })
-      .then(setAllProducts)
-      .catch(() => fetch(process.env.PUBLIC_URL + '/cars.json').then((r) => r.json()).then(setAllProducts).catch(() => setAllProducts([])));
+    loadCars().then(setAllProducts);
   }, []);
 
   const handleDeleteProducts = (id) => {
     if (!window.confirm('Remove this car from the inventory?')) return;
     fetch(`http://localhost:5000/cars/${id}`, { method: 'DELETE' })
       .then((r) => { if (!r.ok) throw new Error('api'); return r.json(); })
-      .catch(() => {})
+      .catch(() => removeDemoCar(id))   // demo mode: forget it locally too
       .finally(() => setAllProducts((p) => p.filter((x) => x._id !== id)));
   };
 

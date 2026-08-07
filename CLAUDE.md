@@ -32,10 +32,16 @@ localStorage (`cb_demo_bookings`, `cb_demo_cars`, `cb_demo_reviews`) for writes.
 no code changes.**
 
 ### Adding cars
+Every list of cars comes from **`src/utils/carsSource.js`** (`loadCars()`): real API
+first, else `public/cars.json` **plus** anything an admin added in demo mode
+(`cb_demo_cars`), newest first. Use it — don't re-implement the fetch/fallback.
+
 Append an object to `public/cars.json`: `_id`, `name` (**first word is the make** —
 that's what the hero's make filter groups on), `img`, `price`, `condition`
-(`Excellent` / `Very good` / `Good` / `Like new` — new values appear in the filter
-automatically), `description`. Photos go in `public/cars/<slug>.jpg` referenced as
+(`Like new` / `Excellent` / `Very good` / `Good` — the Add Product form offers exactly
+these four via `CONDITIONS` in `AddProduct.js`; keep the two lists in step, since the
+hero's condition filter is built from whatever strings exist in the data),
+`description`. Photos go in `public/cars/<slug>.jpg` referenced as
 `/cars/<slug>.jpg` (`src/utils/carImage.js` adds `PUBLIC_URL`); remote URLs work too.
 Keep them **public-domain / CC0** (Wikimedia Commons has model-accurate ones) and
 compress to ≲250 KB: `sips -s format jpeg -s formatOptions 68 -Z 900 in.jpg --out out.jpg`.

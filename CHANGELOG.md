@@ -2,6 +2,20 @@
 
 All notable changes to Car Bazar. Format loosely follows Keep a Changelog.
 
+## [2.4.0] — 2026-08-07 — Condition is now a picker
+### Changed
+- **Add Product → Condition** is a set of selectable option cards (Like new /
+  Excellent / Very good / Good, each with a hint) instead of a free-text field.
+  Defaults to *Excellent*, resets to it after a submit, and is a real `radiogroup`
+  so it works with keyboard and screen readers. Typos used to create one-off values
+  that then showed up as their own entry in the hero's condition filter.
+### Fixed
+- Cars added by an admin in demo mode were written to `cb_demo_cars` but **never
+  read back** — they appeared nowhere. `src/utils/carsSource.js` is now the single
+  loader (API → `public/cars.json` + demo additions, newest first) used by the hero,
+  Most Demanded Cars, the inventory page, the 3D showroom and Manage Products.
+  Deleting such a car in Manage Products now also removes it from localStorage.
+
 ## [2.3.0] — 2026-08-07 — Pagination + bigger catalogue
 ### Added
 - **Pagination** (`src/Pages/Shared/Pagination/Pagination.js`, `cb-pager` styles):
