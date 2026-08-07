@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../Car/Car.css';
+import carImage from '../../utils/carImage';
 
 const Car = ({ car }) => {
   const { name, img, _id, price, condition, description } = car;
   return (
     <div className="cb-card">
-      <img className="cb-card-img" src={img} alt={name} />
+      <img className="cb-card-img" src={carImage(img)} alt={name} loading="lazy" />
       <div className="cb-card-body">
         <h3 className="cb-card-title">{name}</h3>
         <span className="cb-cond">{condition}</span>

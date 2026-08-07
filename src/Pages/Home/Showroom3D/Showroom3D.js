@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import carImage from '../../../utils/carImage';
 
 /* 3D showroom — perspective mouse-tilt stage with floating chips + animated glow. */
 const Showroom3D = () => {
@@ -35,7 +36,7 @@ const Showroom3D = () => {
         </div>
         <div className="cb-3d-stage" ref={stageRef} style={{ perspective: '1100px' }}>
           <div className="cb-3d-card" style={{ transform: `rotateX(${t.rx}deg) rotateY(${t.ry}deg)` }}>
-            {car && <img src={car.img} alt={car.name} />}
+            {car && <img src={carImage(car.img)} alt={car.name} />}
             <div className="cb-3d-badge b1" style={{ transform: 'translateZ(70px)' }}>🛡 120-point check</div>
             <div className="cb-3d-badge b2" style={{ transform: 'translateZ(90px)' }}>⚡ Instant booking</div>
             <div className="cb-3d-badge b3" style={{ transform: 'translateZ(55px)' }}>

@@ -1,14 +1,19 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import Navigation from '../Home/Navigation/Navigation';
 import Footer from '../Shared/Footer/Footer';
+import Pagination from '../Shared/Pagination/Pagination';
 import Car from './../Car/Car';
 
 /* Inventory. Reads the hero's search filters from the query string
    (?make=&condition=&max=) so the homepage console actually does something. */
 
+const PER_PAGE = 9;
+
 const MoreCars = () => {
   const [cars, setCars] = useState([]);
+  const [page, setPage] = useState(1);
+  const gridRef = useRef(null);
   const history = useHistory();
   const { search } = useLocation();
 
@@ -37,6 +42,19 @@ const MoreCars = () => {
     condition && { key: 'condition', label: `${condition} condition` },
     max && { key: 'max', label: `Up to $${max.toLocaleString()}` },
   ].filter(Boolean);
+
+  // a changed filter set means the old page number is meaningless
+  useEffect(() => { setPage(1); }, [search]);
+
+  const shown = visible.slice((page - 1) * PER_PAGE, page * PER_PAGE);
+
+  const changePage = (n) => {
+    setPage(n);
+    if (gridRef.current) {
+      const y = gridRef.current.getBoundingClientRect().top + window.scrollY - 110;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  };
 
   const drop = (key) => {
     const next = new URLSearchParams(search);
@@ -71,9 +89,12 @@ const MoreCars = () => {
           )}
 
           {visible.length > 0 ? (
-            <div className="cb-grid-3">
-              {visible.map((car) => <Car key={car._id} car={car} />)}
-            </div>
+            <>
+              <div className="cb-grid-3" ref={gridRef}>
+                {shown.map((car) => <Car key={car._id} car={car} />)}
+              </div>
+              <Pagination page={page} pageSize={PER_PAGE} total={visible.length} onChange={changePage} />
+            </>
           ) : (
             <div className="cb-empty">
               <i className="fas fa-car-side" />

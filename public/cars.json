@@ -1,8 +1,122 @@
 [
-  {"_id":"c1","name":"BMW 3 Series (2021)","img":"https://images.unsplash.com/photo-1555215695-3004980ad54e?w=900&q=80","price":32900,"condition":"Excellent","description":"One owner, full service history, 28.000 km."},
-  {"_id":"c2","name":"Mercedes C-Class (2020)","img":"https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=900&q=80","price":32500,"condition":"Excellent","description":"AMG line, panoramic roof, 41.000 km."},
-  {"_id":"c3","name":"Audi A4 Avant (2019)","img":"https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=900&q=80","price":25900,"condition":"Very good","description":"Quattro, virtual cockpit, 62.000 km."},
-  {"_id":"c4","name":"VW Golf 8 (2021)","img":"https://images.unsplash.com/photo-1471479917193-f00955256257?w=900&q=80","price":21400,"condition":"Excellent","description":"Life edition, LED matrix, 19.000 km."},
-  {"_id":"c5","name":"Tesla Model 3 (2022)","img":"https://images.unsplash.com/photo-1560958089-b8a1929cea89?w=900&q=80","price":36900,"condition":"Like new","description":"Long Range, autopilot, 22.000 km."},
-  {"_id":"c6","name":"Porsche Macan (2018)","img":"https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=900&q=80","price":45900,"condition":"Very good","description":"S trim, Bose sound, 78.000 km."}
+  {
+    "_id": "c1",
+    "name": "BMW 3 Series (2021)",
+    "img": "https://images.unsplash.com/photo-1555215695-3004980ad54e?w=900&q=80",
+    "price": 32900,
+    "condition": "Excellent",
+    "description": "One owner, full service history, 28.000 km."
+  },
+  {
+    "_id": "c2",
+    "name": "Mercedes C-Class (2020)",
+    "img": "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=900&q=80",
+    "price": 32500,
+    "condition": "Excellent",
+    "description": "AMG line, panoramic roof, 41.000 km."
+  },
+  {
+    "_id": "c3",
+    "name": "Audi A4 Avant (2019)",
+    "img": "https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=900&q=80",
+    "price": 25900,
+    "condition": "Very good",
+    "description": "Quattro, virtual cockpit, 62.000 km."
+  },
+  {
+    "_id": "c4",
+    "name": "VW Golf 8 (2021)",
+    "img": "https://images.unsplash.com/photo-1471479917193-f00955256257?w=900&q=80",
+    "price": 21400,
+    "condition": "Excellent",
+    "description": "Life edition, LED matrix, 19.000 km."
+  },
+  {
+    "_id": "c5",
+    "name": "Tesla Model 3 (2022)",
+    "img": "https://images.unsplash.com/photo-1560958089-b8a1929cea89?w=900&q=80",
+    "price": 36900,
+    "condition": "Like new",
+    "description": "Long Range, autopilot, 22.000 km."
+  },
+  {
+    "_id": "c6",
+    "name": "Porsche Macan (2018)",
+    "img": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=900&q=80",
+    "price": 45900,
+    "condition": "Very good",
+    "description": "S trim, Bose sound, 78.000 km."
+  },
+  {
+    "_id": "c7",
+    "name": "Audi Q5 2.0 TDI quattro (2015)",
+    "img": "/cars/audi-q5-2-0-tdi-quattro-2015.jpg",
+    "price": 23900,
+    "condition": "Very good",
+    "description": "Quattro all-wheel drive, tow bar, 96.000 km."
+  },
+  {
+    "_id": "c8",
+    "name": "Toyota RAV4 Hybrid (2018)",
+    "img": "/cars/toyota-rav4-hybrid-2018.jpg",
+    "price": 27400,
+    "condition": "Excellent",
+    "description": "Hybrid AWD, single owner, 61.000 km."
+  },
+  {
+    "_id": "c9",
+    "name": "Volvo XC60 D5 AWD (2014)",
+    "img": "/cars/volvo-xc60-d5-awd-2014.jpg",
+    "price": 17900,
+    "condition": "Good",
+    "description": "Leather interior, winter package, 134.000 km."
+  },
+  {
+    "_id": "c10",
+    "name": "Skoda Octavia vRS Estate (2020)",
+    "img": "/cars/skoda-octavia-vrs-estate-2020.jpg",
+    "price": 22600,
+    "condition": "Excellent",
+    "description": "vRS estate, DSG, full service history, 54.000 km."
+  },
+  {
+    "_id": "c11",
+    "name": "Ford Kuga PHEV (2024)",
+    "img": "/cars/ford-kuga-phev-2024.jpg",
+    "price": 28900,
+    "condition": "Like new",
+    "description": "Plug-in hybrid, 12.000 km, factory warranty."
+  },
+  {
+    "_id": "c12",
+    "name": "Hyundai Tucson Hybrid (2021)",
+    "img": "/cars/hyundai-tucson-hybrid-2021.jpg",
+    "price": 24500,
+    "condition": "Excellent",
+    "description": "Hybrid, heated seats, reversing camera, 38.000 km."
+  },
+  {
+    "_id": "c13",
+    "name": "Kia Sportage GT-Line (2022)",
+    "img": "/cars/kia-sportage-gt-line-2022.jpg",
+    "price": 29900,
+    "condition": "Like new",
+    "description": "1.6 T-GDi, warranty until 2029, 19.000 km."
+  },
+  {
+    "_id": "c14",
+    "name": "Nissan Qashqai Mild Hybrid (2021)",
+    "img": "/cars/nissan-qashqai-mild-hybrid-2021.jpg",
+    "price": 21900,
+    "condition": "Very good",
+    "description": "360° camera, adaptive cruise, 44.000 km."
+  },
+  {
+    "_id": "c15",
+    "name": "Peugeot 3008 GT Line (2018)",
+    "img": "/cars/peugeot-3008-gt-line-2018.jpg",
+    "price": 18400,
+    "condition": "Good",
+    "description": "GT Line, panoramic roof, 88.000 km."
+  }
 ]

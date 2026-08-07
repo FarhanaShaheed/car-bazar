@@ -31,6 +31,16 @@ localStorage (`cb_demo_bookings`, `cb_demo_cars`, `cb_demo_reviews`) for writes.
 **Adding real Firebase keys + a running API switches everything back automatically —
 no code changes.**
 
+### Adding cars
+Append an object to `public/cars.json`: `_id`, `name` (**first word is the make** —
+that's what the hero's make filter groups on), `img`, `price`, `condition`
+(`Excellent` / `Very good` / `Good` / `Like new` — new values appear in the filter
+automatically), `description`. Photos go in `public/cars/<slug>.jpg` referenced as
+`/cars/<slug>.jpg` (`src/utils/carImage.js` adds `PUBLIC_URL`); remote URLs work too.
+Keep them **public-domain / CC0** (Wikimedia Commons has model-accurate ones) and
+compress to ≲250 KB: `sips -s format jpeg -s formatOptions 68 -Z 900 in.jpg --out out.jpg`.
+Pagination adapts on its own — no code change needed.
+
 ## Design system
 `src/index.css` holds everything (loaded *after* bootstrap in `src/index.js` so it wins
 the cascade). Tokens: deep ink `#0f1115` + amber `#ff9f1c`, Plus Jakarta Sans.

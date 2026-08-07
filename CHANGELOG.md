@@ -2,6 +2,20 @@
 
 All notable changes to Car Bazar. Format loosely follows Keep a Changelog.
 
+## [2.3.0] — 2026-08-07 — Pagination + bigger catalogue
+### Added
+- **Pagination** (`src/Pages/Shared/Pagination/Pagination.js`, `cb-pager` styles):
+  numbered pages with ellipsis, prev/next, disabled edges, a "showing x–y of z" line
+  and a smooth scroll back to the grid. Used by *Most Demanded Cars* (6 per page) and
+  the inventory page (9 per page, resets to page 1 when the filters change).
+- **9 more cars** in `public/cars.json` (6 → 15), adding Audi, Toyota, Volvo, Skoda,
+  Ford, Hyundai, Kia, Nissan and Peugeot to the hero's make filter, plus a new "Good"
+  condition. Photos are **public-domain / CC0** (Wikimedia Commons), downloaded to
+  `public/cars/` and compressed to ~130–240 KB each — served from our own origin
+  rather than hot-linked.
+- `src/utils/carImage.js` resolves repo-local image paths against `PUBLIC_URL`;
+  car card images are now `loading="lazy"`.
+
 ## [2.2.0] — 2026-08-07 — New hero: inventory search console
 ### Added
 - Hero rebuilt around a **working search console** (`cb-hx-*` in `src/index.css`,

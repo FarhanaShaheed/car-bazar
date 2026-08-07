@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import Navigation from '../Home/Navigation/Navigation';
 import Footer from '../Shared/Footer/Footer';
+import carImage from '../../utils/carImage';
 
 const LS_BOOKINGS = 'cb_demo_bookings';
 
@@ -62,7 +63,7 @@ const Booking = () => {
           ) : (
             <div className="cb-grid-3" style={{ gridTemplateColumns: '1.1fr .9fr', alignItems: 'start', gap: 34 }}>
               <div className="cb-card">
-                <img className="cb-card-img" style={{ height: 300 }} src={car.img} alt={car.name} />
+                <img className="cb-card-img" style={{ height: 300 }} src={carImage(car.img)} alt={car.name} />
                 <div className="cb-card-body">
                   <h2 className="cb-card-title" style={{ fontSize: '1.4rem' }}>{car.name}</h2>
                   <span className="cb-cond">{car.condition}</span>

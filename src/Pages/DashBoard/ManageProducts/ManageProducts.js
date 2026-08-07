@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { AdminPage } from '../ui/AdminUI';
+import carImage from '../../../utils/carImage';
 
 const ManageProducts = () => {
   const [allProducts, setAllProducts] = useState([]);
@@ -30,7 +31,7 @@ const ManageProducts = () => {
             ) : allProducts.map((p) => (
               <tr key={p._id}>
                 <td style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                  {p.img && <img src={p.img} alt={p.name} style={{ width: 54, height: 38, objectFit: 'cover', borderRadius: 8 }} />}
+                  {p.img && <img src={carImage(p.img)} alt={p.name} style={{ width: 54, height: 38, objectFit: 'cover', borderRadius: 8 }} />}
                   <b>{p.name}</b>
                 </td>
                 <td>${Number(p.price || 0).toLocaleString()}</td>

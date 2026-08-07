@@ -527,3 +527,23 @@ p{color:var(--slate)} a{text-decoration:none} img{max-width:100%}
 .cb-empty i{font-size:2rem;color:#c3cad6;margin-bottom:14px;display:block}
 .cb-empty h3{font-size:1.2rem;margin-bottom:8px}
 .cb-empty p{font-size:.93rem;line-height:1.65;margin-bottom:20px}
+
+/* ---- pagination (cb-pager) ---- */
+.cb-pager{display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:36px}
+.cb-pager-count{font-size:.88rem;color:var(--slate);margin:0}
+.cb-pager-count b{color:var(--ink)}
+.cb-pager-btns{display:flex;align-items:center;gap:7px;flex-wrap:wrap;justify-content:center}
+.cb-pager-btns button{
+  min-width:42px;height:42px;padding:0 13px;border-radius:12px;cursor:pointer;
+  background:#fff;border:1.5px solid var(--line);color:var(--ink);
+  font-family:inherit;font-size:.92rem;font-weight:700;transition:.18s;
+}
+.cb-pager-btns button:hover:not(:disabled){border-color:var(--amber);color:var(--amber-dark);transform:translateY(-2px)}
+.cb-pager-btns button.is-on{
+  background:linear-gradient(135deg,var(--amber),var(--amber-dark));border-color:transparent;
+  color:#141414;box-shadow:0 8px 20px rgba(255,159,28,.4);
+}
+.cb-pager-btns button:disabled{opacity:.42;cursor:not-allowed}
+.cb-pager-btns button i{font-size:.78rem}
+.cb-pager-gap{color:var(--slate);padding:0 2px;font-weight:700}
+@media (prefers-reduced-motion: reduce){.cb-pager-btns button{transition:none}}
