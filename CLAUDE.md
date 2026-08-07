@@ -39,6 +39,12 @@ the cascade). Tokens: deep ink `#0f1115` + amber `#ff9f1c`, Plus Jakarta Sans.
   `translateZ` floating badges).
 - **Admin panel:** `ad-*` classes + `src/Pages/DashBoard/ui/AdminUI.js`
   (`StatCard` with count-up + 3D tilt, animated SVG `LineChart`, CSS `BarChart`).
+- **Hero:** `cb-hx-*` classes + `src/Pages/Home/Banner/Banner.js` — full-bleed stage
+  (parallax background, light-trail streaks, make-rotating headline, inventory ticker)
+  with a search console that pushes `?make=&condition=&max=` to `/morecars`, which
+  filters on those params. Keep it visually distinct from the other portfolio projects
+  (doctors-portal / tour-booking use the split image + floating chips layout).
+  The old `.cb-hero*` rules are dead code kept only for reference.
 - **Contact section:** `cb-ct-*` classes (end of `index.css`) +
   `src/Pages/Home/ContactUs/ContactUs.js` — dark info rail + floating-label form with
   topic chips, validation and a success state (writes to `cb_demo_messages` in

@@ -2,6 +2,20 @@
 
 All notable changes to Car Bazar. Format loosely follows Keep a Changelog.
 
+## [2.2.0] — 2026-08-07 — New hero: inventory search console
+### Added
+- Hero rebuilt around a **working search console** (`cb-hx-*` in `src/index.css`,
+  `src/Pages/Home/Banner/Banner.js`): make / condition / budget controls whose button
+  shows the live match count and hands the filters to `/morecars` via the query string.
+- Full-bleed cinematic stage with mouse parallax, animated light-trail streaks, a
+  headline that rotates through the **makes actually in stock**, quick-pick chips and a
+  "just listed" inventory ticker built from the real car data.
+- `/morecars` now reads `?make=&condition=&max=`, shows removable filter chips, an
+  "x of y cars match" count and a proper empty state.
+### Changed
+- Dropped the old split hero (image + floating chips) — it was structurally identical
+  to the other portfolio projects' heroes.
+
 ## [2.1.0] — 2026-08-07 — Contact section rebuilt
 ### Added
 - **New contact experience** (`src/Pages/Home/ContactUs/ContactUs.js`, `cb-ct-*` styles
