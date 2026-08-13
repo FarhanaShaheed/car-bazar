@@ -661,3 +661,6 @@ p{color:var(--slate)} a{text-decoration:none} img{max-width:100%}
 /* the dashboard sidebar brand is a link back to the showroom */
 a.ad-brand{text-decoration:none;transition:.16s}
 a.ad-brand:hover{opacity:.85}
+
+/* header chip: amber for administrators, neutral for customers */
+.ad-chip.is-admin{background:linear-gradient(135deg,var(--amber),var(--amber-dark));color:#141414;border-color:transparent}

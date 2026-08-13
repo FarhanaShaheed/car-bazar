@@ -2,6 +2,16 @@
 
 All notable changes to Car Bazar. Format loosely follows Keep a Changelog.
 
+## [3.0.2] — 2026-08-13
+### Fixed
+- **"DEMO MODE" was still shown after logging in with a real Firebase account.** The
+  dashboard header now shows the actual role — **ADMIN** or **CUSTOMER** — and only falls
+  back to "DEMO MODE" when no Firebase keys are configured.
+- **Opening a booking landed halfway down the page.** React Router keeps the scroll
+  position across routes, so clicking *Book* from a card further down the home page
+  showed the payment section first. `src/components/ScrollToTop.js` resets the scroll on
+  every navigation (it leaves `#hash` links alone).
+
 ## [3.0.1] — 2026-08-13 — Car Bazar's own Firebase project
 ### Changed
 - Auth moved from the shared **medicate-diagnostic-center** project to Car Bazar's own

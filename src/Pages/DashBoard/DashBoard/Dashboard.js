@@ -11,6 +11,7 @@ import Payment from '../Payment/Payment';
 import MyOrders from '../MyOrders/MyOrders';
 import AddReviews from './../AddReviews/AddReviews';
 import AdminRoute from './../../Login/AdminRoute/AdminRoute';
+import { isFirebaseConfigured } from '../../Login/Firebase/Firebase.config';
 
 const Dashboard = () => {
   const { path, url } = useRouteMatch();
@@ -57,7 +58,9 @@ const Dashboard = () => {
             <div className="sub">Welcome back, {user?.displayName || 'there'} 👋</div>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-            <span className="ad-chip">DEMO MODE</span>
+            {isFirebaseConfigured
+              ? <span className={`ad-chip${admin ? ' is-admin' : ''}`}>{admin ? 'ADMIN' : 'CUSTOMER'}</span>
+              : <span className="ad-chip">DEMO MODE</span>}
             <div className="ad-user"><span className="ad-avatar">{initial}</span>
               <span style={{ display: 'none' }} className="d-sm-inline">{user?.displayName}</span></div>
           </div>

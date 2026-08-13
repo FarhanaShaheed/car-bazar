@@ -102,6 +102,8 @@ the cascade). Tokens: deep ink `#0f1115` + amber `#ff9f1c`, Plus Jakarta Sans.
   topic chips, validation and a success state (writes to `cb_demo_messages` in
   localStorage), then a tilt-on-hover map card with a pulsing pin. Below 720px the
   map's floating info card becomes a static block so it stops covering the map.
+- `src/components/ScrollToTop.js` is mounted inside `BrowserRouter`: React Router does not
+  reset scroll between routes, which made `/booking/:id` open at the payment section.
 - Legacy per-component `.css` files were emptied on purpose — don't restore them.
 - All animation respects `prefers-reduced-motion`.
 

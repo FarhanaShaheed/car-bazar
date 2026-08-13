@@ -10,6 +10,7 @@ import NotFound from './Pages/NotFound/NotFound';
 import Booking from './Pages/Booking/Booking';
 import PrivateRoute from './Pages/Login/PrivateRoute/PrivateRoute';
 import Dashboard from './Pages/DashBoard/DashBoard/Dashboard';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   // scroll-reveal: mark section children and reveal on intersect
@@ -26,6 +27,7 @@ function App() {
     <div className="App">
       <AuthProvider>
       <BrowserRouter>
+        <ScrollToTop />
         <Switch>
           <Route exact path="/">
             <Home></Home>
