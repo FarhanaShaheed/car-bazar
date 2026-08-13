@@ -45,16 +45,6 @@ localStorage (`cb_demo_bookings`, `cb_demo_cars`, `cb_demo_reviews`) for writes.
 **Adding real Firebase keys + a running API switches everything back automatically —
 no code changes.**
 
-### Roles (admin vs customer)
-`useFirebase` exports `DEMO_ADMIN_EMAIL`, `isDemoAdmin()`, `addDemoAdmin()`.
-- **Demo mode:** `admin@carbazar.test` is an admin; any other email is a customer.
-  The list is `cb_demo_admins` in localStorage and *Make Admin* appends to it.
-  `AdminRoute` still guards the routes, so a customer typing `/dashboard/addProduct`
-  gets nothing.
-- **Real mode:** roles come from the `users` collection (`GET /users/:email` → `admin`),
-  and *Make Admin* does `PUT /users/admin`. That needs the Express server + MongoDB
-  running; see "Is there a database?" above.
-
 ### Adding cars
 Every list of cars comes from **`src/utils/carsSource.js`** (`loadCars()`): real API
 first, else `public/cars.json` **plus** anything an admin added in demo mode
