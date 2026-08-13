@@ -677,3 +677,15 @@ a.ad-brand:hover{opacity:.85}
 .ad-modal-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:16px}
 .ad-linkbtn{background:none;border:none;color:var(--slate);font-family:inherit;font-size:.86rem;font-weight:600;cursor:pointer;text-decoration:underline}
 .ad-linkbtn:hover{color:var(--ink)}
+
+/* forgot password */
+.cb-forgot-row{display:flex;justify-content:flex-end;margin:-6px 0 12px}
+.cb-linkbtn{background:none;border:none;padding:0;color:var(--amber-dark);font-family:inherit;font-size:.84rem;font-weight:700;cursor:pointer;text-decoration:underline}
+.cb-linkbtn:hover{color:var(--ink)}
+.cb-reset{background:#f4f7fb;border:1px dashed #cfd8e6;border-radius:14px;padding:15px 16px;margin-bottom:18px}
+.cb-reset > b{display:block;font-size:.92rem;margin-bottom:5px}
+.cb-reset > b i{color:var(--amber-dark);margin-right:6px}
+.cb-reset p{font-size:.83rem;line-height:1.6;color:var(--slate);margin:0 0 12px}
+.cb-reset input{margin-bottom:10px}
+.cb-reset-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.cb-reset-actions .cb-btn{padding:10px 18px;font-size:.87rem}

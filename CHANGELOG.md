@@ -2,6 +2,13 @@
 
 All notable changes to Car Bazar. Format loosely follows Keep a Changelog.
 
+## [3.3.0] — 2026-08-14 — Forgot password
+### Added
+- **"Forgot password?"** on the login page: enter the address, Firebase emails a reset
+  link, and the panel confirms without revealing whether the address is registered
+  (`user-not-found` is swallowed on purpose, so the form can't be used to enumerate users).
+  Available only with real Firebase auth; demo mode says so plainly.
+
 ## [3.2.0] — 2026-08-14 — The site now runs on a real database
 ### Changed
 - Cars, reviews, bookings, users and contact messages all read and write **MongoDB Atlas**

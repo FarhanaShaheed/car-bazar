@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import initializeFirebase from "../Pages/Login/Firebase/Firebase.init";
 import { isFirebaseConfigured } from "../Pages/Login/Firebase/Firebase.config";
-import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, updateProfile, getIdToken, signOut } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, updateProfile, getIdToken, signOut, sendPasswordResetEmail } from "firebase/auth";
 import API_BASE from '../utils/api';
 
 if (isFirebaseConfigured) initializeFirebase();
@@ -140,6 +140,21 @@ const useFirebase = () => {
     return () => unsubscribed;
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  /* Password reset. Firebase emails a reset link; we always report success so the form
+     cannot be used to discover which addresses are registered. */
+  const resetPassword = (email) => {
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+      return Promise.reject(new Error('Please enter the email address you registered with.'));
+    }
+    if (!isFirebaseConfigured) {
+      return Promise.reject(new Error('Password reset needs Firebase — not available in demo mode.'));
+    }
+    return sendPasswordResetEmail(auth, email).catch((e) => {
+      if (String(e && e.code).includes('user-not-found')) return;   // do not leak existence
+      throw new Error(friendlyAuthError(e));
+    });
+  };
+
   const logout = () => {
     if (!isFirebaseConfigured) { demoWrite(null); setUser({}); setAdmin(false); return; }
     setIsLoading(true);
@@ -158,6 +173,7 @@ const useFirebase = () => {
   return {
     user,
     admin,
+    resetPassword,
     isLoading,
     registerUser,
     authError,
