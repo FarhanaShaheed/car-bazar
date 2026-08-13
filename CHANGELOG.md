@@ -2,6 +2,12 @@
 
 All notable changes to Car Bazar. Format loosely follows Keep a Changelog.
 
+## [3.2.0] — 2026-08-14 — The site now runs on a real database
+### Changed
+- Cars, reviews, bookings, users and contact messages all read and write **MongoDB Atlas**
+  through https://car-bazar-api-farhana.vercel.app (`REACT_APP_API_URL`). The JSON/
+  localStorage fallbacks stay in place, so the site still works if the API is asleep.
+
 ## [3.1.0] — 2026-08-14 — Contact messages reach the admin
 ### Added
 - **Admin → Messages** (`src/Pages/DashBoard/Messages/Messages.js`): every contact-form

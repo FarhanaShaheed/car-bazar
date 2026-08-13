@@ -19,7 +19,16 @@ NODE_OPTIONS=--openssl-legacy-provider npm start
 ```
 Node 17+ needs `NODE_OPTIONS=--openssl-legacy-provider` (old react-scripts + OpenSSL 3).
 
-## Is there a database? (short answer: the code yes, the live demo no)
+## Database — LIVE since 2026-08-14
+MongoDB **Atlas free M0**, project `car-bazar`, cluster `cluster0.f93zhjx.mongodb.net`,
+database `allCars` (collections: cars, reviews, bookings, users, messages).
+API: **https://car-bazar-api-farhana.vercel.app** — the Express app from
+`../car-bazar-server-site` running as a Vercel function, `MONGO_URI` held as a Vercel
+sensitive env var. The client points at it via `REACT_APP_API_URL` in `.env`.
+Seed more data with `MONGO_URI=... node seed.js` in the server repo.
+Health check: `curl https://car-bazar-api-farhana.vercel.app/` → document counts.
+
+### (historical) Is there a database? — the answer before 2026-08-14
 A complete **Express + MongoDB** API exists in `../car-bazar-server-site` (`index.js`):
 collections `cars`, `bookings`, `users`, `reviews` with full CRUD + an admin-role endpoint.
 It is **not hosted anywhere and has no credentials** (`.env.example` only — the original
