@@ -2,6 +2,12 @@
 
 All notable changes to Car Bazar. Format loosely follows Keep a Changelog.
 
+## [3.0.1] — 2026-08-13 — Car Bazar's own Firebase project
+### Changed
+- Auth moved from the shared **medicate-diagnostic-center** project to Car Bazar's own
+  **car-bazar-4d9a6** — separate user pool, as it should be. Config lives in `.env`
+  (now gitignored; `.env.local` removed so there is a single source).
+
 ## [3.0.0] — 2026-08-13 — Real Firebase authentication
 ### Removed
 - Reverted the demo-role system (hard-coded `admin@carbazar.test`, the login account

@@ -34,9 +34,10 @@ Every request goes through `API_BASE` from `src/utils/api.js` — there are no h
 hosts left in the app, so that one variable flips the whole thing over.
 
 ## 🔐 Authentication (REAL Firebase since 2026-08-13)
-`.env.local` (gitignored, **build-time** — CRA inlines it, Vercel env vars do nothing
-because we deploy a prebuilt folder) holds her Firebase web config, currently the
-existing **medicate-diagnostic-center** project. Everyone registers/logs in for real.
+**`.env`** (gitignored, **build-time** — CRA inlines it; Vercel env vars do nothing here
+because we deploy a prebuilt folder) holds Car Bazar's **own** Firebase project
+**`car-bazar-4d9a6`** — its user pool is separate from Medicate's. Everyone registers and
+logs in for real; wrong credentials are rejected.
 
 **Roles:** `admin` = `GET /users/:email` says so (needs the API) **or** the email is in
 `REACT_APP_ADMIN_EMAILS`. Everyone else is a customer; `AdminRoute` guards the pages.
@@ -45,8 +46,9 @@ existing **medicate-diagnostic-center** project. Everyone registers/logs in for 
 Settings → **Authorized domains**, or Google Sign-In returns `auth/unauthorized-domain`
 (email/password already works from any domain).
 
-To move Car Bazar to its own Firebase project, swap the six values in `.env.local` and
-rebuild — nothing else changes.
+If the project ever changes again: swap the six values in `.env`, rebuild, redeploy —
+nothing else changes. Check the result with
+`grep -c car-bazar-4d9a6 build/static/js/main.*.chunk.js`.
 
 ## ⭐ Demo mode (only when no Firebase keys are present)
 `src/Pages/Login/Firebase/Firebase.config.js` exports `isFirebaseConfigured`
