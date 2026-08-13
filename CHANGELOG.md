@@ -2,6 +2,19 @@
 
 All notable changes to Car Bazar. Format loosely follows Keep a Changelog.
 
+## [2.8.0] — 2026-08-13 — Separate admin and customer accounts
+### Fixed
+- The **Car Bazar logo/name in the dashboard sidebar was not clickable** — it is now a
+  link back to the showroom (`/home`).
+### Added
+- **Real roles in demo mode.** Previously every demo login became an admin. Now
+  `admin@carbazar.test` is an administrator and **every other email is a customer**:
+  the Administration section disappears and `AdminRoute` blocks the pages even if the
+  URL is typed by hand. The admin list lives in `cb_demo_admins` (localStorage) and
+  **Make Admin** really adds to it, so promoting a user can be demonstrated end to end.
+- **Demo account picker on the login page** — one click fills the admin or the customer
+  credentials — plus an **ADMIN / CUSTOMER** chip in the dashboard header.
+
 ## [2.7.0] — 2026-08-13 — One switch to a real database
 ### Changed
 - All 15 hardcoded `http://localhost:5000` calls now go through **`src/utils/api.js`**

@@ -22,7 +22,9 @@ const Dashboard = () => {
   return (
     <div className="ad-shell">
       <aside className="ad-side">
-        <div className="ad-brand"><span className="cb-logo"><i className="fas fa-car" /></span> Car Bazar</div>
+        <Link to="/home" className="ad-brand" title="Back to the showroom">
+          <span className="cb-logo"><i className="fas fa-car" /></span> Car Bazar
+        </Link>
 
         <div className="ad-sect">Overview</div>
         <Link className={is(url)} to={`${url}`}><i className="fas fa-chart-line" /> Dashboard</Link>
@@ -55,7 +57,7 @@ const Dashboard = () => {
             <div className="sub">Welcome back, {user?.displayName || 'there'} 👋</div>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-            <span className="ad-chip">DEMO MODE</span>
+            <span className={`ad-chip${admin ? ' is-admin' : ''}`}>{admin ? 'ADMIN' : 'CUSTOMER'}</span>
             <div className="ad-user"><span className="ad-avatar">{initial}</span>
               <span style={{ display: 'none' }} className="d-sm-inline">{user?.displayName}</span></div>
           </div>

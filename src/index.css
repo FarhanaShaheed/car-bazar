@@ -657,3 +657,20 @@ p{color:var(--slate)} a{text-decoration:none} img{max-width:100%}
   background:linear-gradient(135deg,#e7f7f0,#cdeee0);color:#0f7a52;font-size:1.5rem;box-shadow:0 0 0 10px rgba(62,207,142,.1)}
 .cb-bk-done h2{font-size:1.5rem;margin-bottom:10px}
 @media (prefers-reduced-motion: reduce){.cb-bk-pay-opt:hover > span{transform:none}}
+
+/* demo account picker on the login page */
+.cb-demo-hint{background:#f4f7fb;border:1px dashed #cfd8e6;border-radius:14px;padding:13px 15px;margin-bottom:18px}
+.cb-demo-hint > b{display:block;font-size:.78rem;color:var(--ink);margin-bottom:9px}
+.cb-demo-hint button{
+  display:flex;align-items:center;gap:9px;width:100%;text-align:left;margin-bottom:7px;cursor:pointer;
+  background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:9px 12px;
+  font-family:inherit;font-size:.83rem;font-weight:600;color:var(--ink);transition:.16s;
+}
+.cb-demo-hint button:hover{border-color:var(--amber);background:var(--amber-ghost)}
+.cb-demo-hint button i{color:var(--amber-dark);width:14px}
+.cb-demo-hint em{display:block;font-style:normal;font-size:.74rem;color:var(--slate);margin-top:6px;line-height:1.5}
+/* role chip in the dashboard header */
+.ad-chip.is-admin{background:linear-gradient(135deg,var(--amber),var(--amber-dark));color:#141414;border-color:transparent}
+/* the sidebar brand is a link now */
+a.ad-brand{text-decoration:none;transition:.16s}
+a.ad-brand:hover{opacity:.85}

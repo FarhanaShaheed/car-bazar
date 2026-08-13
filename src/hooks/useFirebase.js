@@ -9,9 +9,31 @@ if (isFirebaseConfigured) initializeFirebase();
 /* DEMO MODE ------------------------------------------------------------
    When no Firebase keys are configured (public demo deploy), authentication
    runs fully client-side: any email/password works, the session is kept in
-   localStorage, and the demo user has admin access so the whole dashboard
-   is explorable. With keys present, the original Firebase flow is used. */
+   localStorage. Roles are real even here: only emails on the demo admin list see the
+   Administration section — everyone else is a customer. With keys present, the original
+   Firebase flow is used and roles come from the users collection. */
 const DEMO_KEY = "cb_demo_user";
+const DEMO_ADMINS_KEY = "cb_demo_admins";
+/* Demo mode has no server to hold roles, so the admin list lives in localStorage.
+   This account is an ADMIN; every other email that signs in is a normal CUSTOMER,
+   which is what makes the two dashboards actually different in the public demo. */
+export const DEMO_ADMIN_EMAIL = "admin@carbazar.test";
+
+export const demoAdmins = () => {
+  try {
+    const saved = JSON.parse(localStorage.getItem(DEMO_ADMINS_KEY));
+    if (Array.isArray(saved) && saved.length) return saved.map((e) => String(e).toLowerCase());
+  } catch (e) { /* fall through to the default */ }
+  return [DEMO_ADMIN_EMAIL];
+};
+
+export const isDemoAdmin = (email) => demoAdmins().includes(String(email || "").toLowerCase());
+
+export const addDemoAdmin = (email) => {
+  const next = [...new Set([...demoAdmins(), String(email || "").toLowerCase()])];
+  try { localStorage.setItem(DEMO_ADMINS_KEY, JSON.stringify(next)); } catch (e) {}
+  return next;
+};
 const demoRead = () => { try { return JSON.parse(localStorage.getItem(DEMO_KEY)) || null; } catch { return null; } };
 const demoWrite = (u) => { try { u ? localStorage.setItem(DEMO_KEY, JSON.stringify(u)) : localStorage.removeItem(DEMO_KEY); } catch {} };
 
@@ -28,7 +50,7 @@ const useFirebase = () => {
 
   /* ---------------- demo implementations ---------------- */
   const demoSignIn = (u, location, history) => {
-    demoWrite(u); setUser(u); setAdmin(true); setAuthError('');
+    demoWrite(u); setUser(u); setAdmin(isDemoAdmin(u.email)); setAuthError('');
     setIsLoading(false); setIsAdminLoading(false);
     const destination = location?.state?.from || '/dashboard';
     if (history) history.replace(destination);
@@ -93,7 +115,7 @@ const useFirebase = () => {
   useEffect(() => {
     if (!isFirebaseConfigured) {
       const u = demoRead();
-      if (u) { setUser(u); setAdmin(true); }
+      if (u) { setUser(u); setAdmin(isDemoAdmin(u.email)); }
       setIsLoading(false); setIsAdminLoading(false);
       return;
     }

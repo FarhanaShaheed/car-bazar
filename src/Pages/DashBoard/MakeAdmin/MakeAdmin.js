@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { AdminPage } from '../ui/AdminUI';
 import '../MakeAdmin/MakeAdmin.css';
 import API_BASE from '../../../utils/api';
+import { addDemoAdmin, demoAdmins } from '../../../hooks/useFirebase';
 
 const MakeAdmin = () => {
   const [email, setEmail] = useState('');
@@ -13,14 +14,17 @@ const MakeAdmin = () => {
       method: 'PUT', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ email }),
     })
       .then((r) => { if (!r.ok) throw new Error('api'); return r.json(); })
-      .catch(() => {})
+      .catch(() => addDemoAdmin(email))   // demo mode: remember the role locally
       .finally(() => { setOk(true); setTimeout(() => setOk(false), 4000); });
   };
 
   return (
     <AdminPage title="Make an Admin" subtitle="Grant administrator privileges to a registered user">
       <div className="ad-panel" style={{ maxWidth: 560 }}>
-        <div className="ad-note">🔐 Admin rights let a user manage inventory and confirm customer orders.</div>
+        <div className="ad-note">
+          🔐 Admin rights let a user manage inventory and confirm customer orders.
+          Current admins: <b>{demoAdmins().join(', ')}</b>
+        </div>
         <form className="ad-form" onSubmit={handleAdminSubmit}>
           <label>User email</label>
           <input type="email" placeholder="name@example.com" onChange={(e) => setEmail(e.target.value)} required />

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useHistory } from 'react-router-dom';
 import useAuth from './../../hooks/useAuth';
+import { DEMO_ADMIN_EMAIL } from '../../hooks/useFirebase';
 import Navigation from '../Home/Navigation/Navigation';
 
 const Login = () => {
@@ -21,10 +22,20 @@ const Login = () => {
       <div className="cb-auth">
         <div className="cb-auth-card">
           <h2>Welcome back</h2>
-          <p className="sub">Log in to book cars and manage your orders. <b>Demo tip:</b> any email + password works.</p>
+          <p className="sub">Log in to book cars and manage your orders.</p>
+          <div className="cb-demo-hint">
+            <b>Try the demo — any password works</b>
+            <button type="button" onClick={() => setLoginData({ email: DEMO_ADMIN_EMAIL, password: 'demo1234' })}>
+              <i className="fas fa-user-shield" /> Admin: {DEMO_ADMIN_EMAIL}
+            </button>
+            <button type="button" onClick={() => setLoginData({ email: 'customer@example.com', password: 'demo1234' })}>
+              <i className="fas fa-user" /> Customer: customer@example.com
+            </button>
+            <em>Admins see inventory + order management; customers only see their own orders.</em>
+          </div>
           <form onSubmit={(e) => { e.preventDefault(); loginUser(loginData.email, loginData.password, location, history); }}>
-            <input type="email" name="email" placeholder="Email address" onChange={handleChange} required />
-            <input type="password" name="password" placeholder="Password" onChange={handleChange} required />
+            <input type="email" name="email" placeholder="Email address" value={loginData.email || ''} onChange={handleChange} required />
+            <input type="password" name="password" placeholder="Password" value={loginData.password || ''} onChange={handleChange} required />
             {authError && <div className="cb-error">{authError}</div>}
             <button type="submit" className="cb-btn cb-btn-amber" style={{ width: '100%', justifyContent: 'center', marginTop: 6 }} disabled={isLoading}>
               {isLoading ? 'Logging in…' : 'Log in'}
