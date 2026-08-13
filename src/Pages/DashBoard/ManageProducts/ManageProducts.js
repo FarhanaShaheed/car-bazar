@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { AdminPage } from '../ui/AdminUI';
 import carImage from '../../../utils/carImage';
 import loadCars, { removeDemoCar } from '../../../utils/carsSource';
+import API_BASE from '../../../utils/api';
 
 const ManageProducts = () => {
   const [allProducts, setAllProducts] = useState([]);
@@ -12,7 +13,7 @@ const ManageProducts = () => {
 
   const handleDeleteProducts = (id) => {
     if (!window.confirm('Remove this car from the inventory?')) return;
-    fetch(`http://localhost:5000/cars/${id}`, { method: 'DELETE' })
+    fetch(`${API_BASE}/cars/${id}`, { method: 'DELETE' })
       .then((r) => { if (!r.ok) throw new Error('api'); return r.json(); })
       .catch(() => removeDemoCar(id))   // demo mode: forget it locally too
       .finally(() => setAllProducts((p) => p.filter((x) => x._id !== id)));

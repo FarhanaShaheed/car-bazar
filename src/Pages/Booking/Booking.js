@@ -5,6 +5,7 @@ import useAuth from '../../hooks/useAuth';
 import Navigation from '../Home/Navigation/Navigation';
 import Footer from '../Shared/Footer/Footer';
 import carImage from '../../utils/carImage';
+import API_BASE from '../../utils/api';
 
 /* Booking — full reservation flow.
    Collects the details a dealer actually needs (contact, address, collection slot,
@@ -49,7 +50,7 @@ const Booking = () => {
   const [touched, setTouched] = useState(false);   // becomes true after the first submit
 
   useEffect(() => {
-    fetch(`http://localhost:5000/cars/${carId}`)
+    fetch(`${API_BASE}/cars/${carId}`)
       .then((res) => { if (!res.ok) throw new Error('api'); return res.json(); })
       .catch(() => fetch(process.env.PUBLIC_URL + '/cars.json').then((r) => r.json()).then((all) => all.find((c) => c._id === carId)))
       .then((data) => setCar(data || null))
@@ -142,7 +143,7 @@ const Booking = () => {
       status: 'pending', date: todayISO(),
     };
 
-    fetch('http://localhost:5000/bookings', {
+    fetch(`${API_BASE}/bookings`, {
       method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(booking),
     }).then((r) => { if (!r.ok) throw new Error('api'); })
       .catch(() => {

@@ -19,6 +19,20 @@ NODE_OPTIONS=--openssl-legacy-provider npm start
 ```
 Node 17+ needs `NODE_OPTIONS=--openssl-legacy-provider` (old react-scripts + OpenSSL 3).
 
+## Is there a database? (short answer: the code yes, the live demo no)
+A complete **Express + MongoDB** API exists in `../car-bazar-server-site` (`index.js`):
+collections `cars`, `bookings`, `users`, `reviews` with full CRUD + an admin-role endpoint.
+It is **not hosted anywhere and has no credentials** (`.env.example` only — the original
+Atlas cluster is dead), so the live site never reaches it and falls back to
+`public/cars.json` / `public/reviews.json` + localStorage.
+
+**To switch to a real database — three steps, no code changes:**
+1. Free MongoDB Atlas cluster → put the URI in `car-bazar-server-site/.env` as `MONGO_URI`.
+2. Host that server (Render free tier works) → note its URL.
+3. Build the client with `REACT_APP_API_URL=https://…` (see `src/utils/api.js`).
+Every request goes through `API_BASE` from `src/utils/api.js` — there are no hardcoded
+hosts left in the app, so that one variable flips the whole thing over.
+
 ## ⭐ Demo mode (why the live site works with no backend)
 `src/Pages/Login/Firebase/Firebase.config.js` exports `isFirebaseConfigured`
 (= `Boolean(apiKey)`). `src/hooks/useFirebase.js` runs **dual mode**:

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { AdminPage } from '../ui/AdminUI';
+import API_BASE from '../../../utils/api';
 
 /* Condition is a fixed vocabulary — the hero's condition filter groups on these
    exact strings, so admins pick one instead of typing it (a typo would spawn a
@@ -18,7 +19,7 @@ const AddProduct = () => {
 
   const onSubmit = (data) => {
     const car = { ...data, _id: 'c' + Date.now() };
-    fetch('http://localhost:5000/cars', {
+    fetch(`${API_BASE}/cars`, {
       method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(car),
     })
       .then((r) => { if (!r.ok) throw new Error('api'); return r.json(); })

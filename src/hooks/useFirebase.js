@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import initializeFirebase from "../Pages/Login/Firebase/Firebase.init";
 import { isFirebaseConfigured } from "../Pages/Login/Firebase/Firebase.config";
 import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, updateProfile, getIdToken, signOut } from "firebase/auth";
+import API_BASE from '../utils/api';
 
 if (isFirebaseConfigured) initializeFirebase();
 
@@ -100,7 +101,7 @@ const useFirebase = () => {
       if (user) {
         setIsAdminLoading(true);
         setUser(user);
-        fetch(`http://localhost:5000/users/${user.email}`)
+        fetch(`${API_BASE}/users/${user.email}`)
           .then((res) => res.json())
           .then((data) => setAdmin(data.admin))
           .catch(() => {})
@@ -122,7 +123,7 @@ const useFirebase = () => {
 
   const saveUser = (email, displayName, method) => {
     const user = { email, displayName };
-    fetch('http://localhost:5000/users', {
+    fetch(`${API_BASE}/users`, {
       method: method,
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(user),

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import useAuth from '../../../hooks/useAuth';
 import { AdminPage } from '../ui/AdminUI';
+import API_BASE from '../../../utils/api';
 
 const AddReviews = () => {
   const { register, handleSubmit, reset, setValue, watch } = useForm({ defaultValues: { rating: 5 } });
@@ -12,7 +13,7 @@ const AddReviews = () => {
 
   const onSubmit = (data) => {
     const review = { ...data, _id: 'r' + Date.now() };
-    fetch('http://localhost:5000/reviews', {
+    fetch(`${API_BASE}/reviews`, {
       method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(review),
     })
       .then((r) => { if (!r.ok) throw new Error('api'); return r.json(); })

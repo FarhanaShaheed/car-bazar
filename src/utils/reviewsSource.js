@@ -1,8 +1,9 @@
+import API_BASE from './api';
 /* Same idea as carsSource: real API first, else the seed reviews plus anything
    a logged-in user posted in demo mode — so a review written in the dashboard
    actually appears on the home page, which is what the README promises. */
 
-const API = 'http://localhost:5000/reviews';
+const API = `${API_BASE}/reviews`;
 const DEMO_KEY = 'cb_demo_reviews';
 
 export const readDemoReviews = () => {

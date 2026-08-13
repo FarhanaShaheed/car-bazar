@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { AdminPage } from '../ui/AdminUI';
+import API_BASE from '../../../utils/api';
 
 const LS = 'cb_demo_bookings';
 
@@ -8,7 +9,7 @@ const ManageOrders = () => {
   const [approved, setApproved] = useState(false);
 
   useEffect(() => {
-    fetch('http://localhost:5000/bookings')
+    fetch(`${API_BASE}/bookings`)
       .then((res) => { if (!res.ok) throw new Error('api'); return res.json(); })
       .then(setAllOrders)
       .catch(() => { try { setAllOrders(JSON.parse(localStorage.getItem(LS) || '[]')); } catch (e) { setAllOrders([]); } });
@@ -18,14 +19,14 @@ const ManageOrders = () => {
 
   const handleDeleteOrder = (id) => {
     if (!window.confirm('Delete this order?')) return;
-    fetch(`http://localhost:5000/bookings/${id}`, { method: 'DELETE' })
+    fetch(`${API_BASE}/bookings/${id}`, { method: 'DELETE' })
       .then((r) => { if (!r.ok) throw new Error('api'); return r.json(); })
       .catch(() => local((all) => all.filter((b) => b._id !== id)))
       .finally(() => setAllOrders((o) => o.filter((x) => x._id !== id)));
   };
 
   const handleUpdate = (id) => {
-    fetch(`http://localhost:5000/updateStatus/${id}`, {
+    fetch(`${API_BASE}/updateStatus/${id}`, {
       method: 'PUT', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ status: 'Approved' }),
     })
       .then((r) => { if (!r.ok) throw new Error('api'); return r.json(); })

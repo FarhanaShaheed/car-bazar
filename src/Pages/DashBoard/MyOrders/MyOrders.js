@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import useAuth from '../../../hooks/useAuth';
 import { AdminPage } from '../ui/AdminUI';
 import '../MyOrders/MyOrders.css';
+import API_BASE from '../../../utils/api';
 
 const MyOrders = () => {
   const { user } = useAuth();
   const [myOrders, setMyOrders] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/bookings/${user?.email}`)
+    fetch(`${API_BASE}/bookings/${user?.email}`)
       .then((res) => { if (!res.ok) throw new Error('api'); return res.json(); })
       .then(setMyOrders)
       .catch(() => {
@@ -21,7 +22,7 @@ const MyOrders = () => {
 
   const handleDeleteOrder = (id) => {
     if (!window.confirm('Cancel this booking?')) return;
-    fetch(`http://localhost:5000/bookings/${id}`, { method: 'DELETE' })
+    fetch(`${API_BASE}/bookings/${id}`, { method: 'DELETE' })
       .then((res) => { if (!res.ok) throw new Error('api'); return res.json(); })
       .catch(() => {
         try {

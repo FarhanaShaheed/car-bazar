@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { AdminPage } from '../ui/AdminUI';
 import '../MakeAdmin/MakeAdmin.css';
+import API_BASE from '../../../utils/api';
 
 const MakeAdmin = () => {
   const [email, setEmail] = useState('');
@@ -8,7 +9,7 @@ const MakeAdmin = () => {
 
   const handleAdminSubmit = (e) => {
     e.preventDefault();
-    fetch('http://localhost:5000/users/admin', {
+    fetch(`${API_BASE}/users/admin`, {
       method: 'PUT', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ email }),
     })
       .then((r) => { if (!r.ok) throw new Error('api'); return r.json(); })

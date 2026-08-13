@@ -2,6 +2,13 @@
 
 All notable changes to Car Bazar. Format loosely follows Keep a Changelog.
 
+## [2.7.0] — 2026-08-13 — One switch to a real database
+### Changed
+- All 15 hardcoded `http://localhost:5000` calls now go through **`src/utils/api.js`**
+  (`API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:5000'`). Pointing the
+  app at a hosted Express/MongoDB server is now one build-time variable instead of a
+  code edit in 10 files.
+
 ## [2.6.0] — 2026-08-13 — Real booking flow (validation + payment method)
 ### Fixed
 - **Phone numbers accepted letters.** `gzgug` passed straight through and was saved as a

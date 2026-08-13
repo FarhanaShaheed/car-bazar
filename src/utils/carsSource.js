@@ -1,9 +1,10 @@
+import API_BASE from './api';
 /* Single place that answers "what cars exist?".
    Real API first; if it is not running we fall back to the seed catalogue in
    public/cars.json and merge anything the admin added in demo mode, so a car
    added in the dashboard actually shows up in the showroom and the tables. */
 
-const API = 'http://localhost:5000/cars';
+const API = `${API_BASE}/cars`;
 const DEMO_KEY = 'cb_demo_cars';
 
 export const readDemoCars = () => {
