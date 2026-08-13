@@ -37,16 +37,17 @@ const ManageOrders = () => {
     <AdminPage title="Manage Orders" subtitle={`${allOrders.length} order${allOrders.length === 1 ? '' : 's'} across all customers`}>
       <div className="ad-table-wrap">
         <table className="ad-table">
-          <thead><tr><th>Customer</th><th>Phone</th><th>Car</th><th>Price</th><th>Status</th><th>Actions</th></tr></thead>
+          <thead><tr><th>Customer</th><th>Contact</th><th>Car</th><th>Collection</th><th>Payment</th><th>Status</th><th>Actions</th></tr></thead>
           <tbody>
             {allOrders.length === 0 ? (
-              <tr><td colSpan="6"><div className="ad-empty"><span className="ic">📋</span>No orders yet.</div></td></tr>
+              <tr><td colSpan="7"><div className="ad-empty"><span className="ic">📋</span>No orders yet.</div></td></tr>
             ) : allOrders.map((o) => (
               <tr key={o._id}>
                 <td><b>{o.displayName}</b><br /><span style={{ color: '#8b93a3', fontSize: '.8rem' }}>{o.email}</span></td>
-                <td>{o.phone}</td>
-                <td>{o.carName}</td>
-                <td>${Number(o.carPrice || 0).toLocaleString()}</td>
+                <td>{o.phone}{o.address ? <><br /><span style={{ color: '#8b93a3', fontSize: '.78rem' }}>{o.address}</span></> : null}</td>
+                <td>{o.carName}<br /><span style={{ color: '#8b93a3', fontSize: '.78rem' }}>${Number(o.carPrice || 0).toLocaleString()}</span></td>
+                <td>{o.collectDate ? <>{o.collectDate}<br /><span style={{ color: '#8b93a3', fontSize: '.78rem' }}>{o.collectSlot}</span></> : '—'}</td>
+                <td>{o.payment || '—'}{o.tradeIn ? <><br /><span style={{ color: '#e08700', fontSize: '.78rem' }}>trade-in wanted</span></> : null}</td>
                 <td><span className={`ad-pill ${o.status === 'Approved' ? 'approved' : 'pending'}`}>{o.status}</span></td>
                 <td style={{ display: 'flex', gap: 8 }}>
                   <button className="cb-btn cb-btn-amber" style={{ padding: '7px 14px', fontSize: '.8rem' }} onClick={() => handleUpdate(o._id)}>Confirm</button>

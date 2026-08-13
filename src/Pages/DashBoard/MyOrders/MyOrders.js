@@ -36,15 +36,16 @@ const MyOrders = () => {
     <AdminPage title="My Orders" subtitle={`${myOrders.length} booking${myOrders.length === 1 ? '' : 's'} on your account`}>
       <div className="ad-table-wrap">
         <table className="ad-table">
-          <thead><tr><th>Car</th><th>Price</th><th>Phone</th><th>Status</th><th>Action</th></tr></thead>
+          <thead><tr><th>Car</th><th>Price</th><th>Collection</th><th>Payment</th><th>Status</th><th>Action</th></tr></thead>
           <tbody>
             {myOrders.length === 0 ? (
-              <tr><td colSpan="5"><div className="ad-empty"><span className="ic">🚗</span>No bookings yet — reserve a car from the showroom.</div></td></tr>
+              <tr><td colSpan="6"><div className="ad-empty"><span className="ic">🚗</span>No bookings yet — reserve a car from the showroom.</div></td></tr>
             ) : myOrders.map((o) => (
               <tr key={o._id}>
-                <td><b>{o.carName}</b><br /><span style={{ color: '#8b93a3', fontSize: '.8rem' }}>{o.email}</span></td>
+                <td><b>{o.carName}</b><br /><span style={{ color: '#8b93a3', fontSize: '.8rem' }}>{o.reference ? `Ref ${o.reference}` : o.email}</span></td>
                 <td>${Number(o.carPrice || 0).toLocaleString()}</td>
-                <td>{o.phone}</td>
+                <td>{o.collectDate ? <>{o.collectDate}<br /><span style={{ color: '#8b93a3', fontSize: '.8rem' }}>{o.collectSlot}</span></> : '—'}</td>
+                <td>{o.payment || '—'}{o.deposit ? <><br /><span style={{ color: '#8b93a3', fontSize: '.8rem' }}>deposit ${Number(o.deposit).toLocaleString()}</span></> : null}</td>
                 <td><span className={`ad-pill ${o.status === 'Approved' ? 'approved' : 'pending'}`}>{o.status}</span></td>
                 <td>{o.status === 'pending'
                   ? <button className="cb-btn cb-btn-dark" style={{ padding: '7px 14px', fontSize: '.8rem' }} onClick={() => handleDeleteOrder(o._id)}>Cancel</button>

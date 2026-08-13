@@ -61,6 +61,11 @@ the cascade). Tokens: deep ink `#0f1115` + amber `#ff9f1c`, Plus Jakarta Sans.
   filters on those params. Keep it visually distinct from the other portfolio projects
   (doctors-portal / tour-booking use the split image + floating chips layout).
   The old `.cb-hero*` rules are dead code kept only for reference.
+- **Booking:** `cb-bk-*` classes + `src/Pages/Booking/Booking.js` — four-section
+  reservation form with client-side validation (phone rejects letters / <7 / >15 digits,
+  18+ date-of-birth check, future-only collection date), payment-method cards and a 10%
+  deposit summary. Deliberately collects **no card or bank numbers** — only a chosen
+  method; the dealer arranges payment afterwards. Keep it that way.
 - **Contact section:** `cb-ct-*` classes (end of `index.css`) +
   `src/Pages/Home/ContactUs/ContactUs.js` — dark info rail + floating-label form with
   topic chips, validation and a success state (writes to `cb_demo_messages` in

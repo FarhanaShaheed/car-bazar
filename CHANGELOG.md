@@ -2,6 +2,24 @@
 
 All notable changes to Car Bazar. Format loosely follows Keep a Changelog.
 
+## [2.6.0] — 2026-08-13 — Real booking flow (validation + payment method)
+### Fixed
+- **Phone numbers accepted letters.** `gzgug` passed straight through and was saved as a
+  contact number. The field now rejects letters outright and explains why, and also
+  catches too-short (<7 digits) and too-long (>15 digits) input.
+### Added
+- **Full reservation form** (`src/Pages/Booking/Booking.js`, `cb-bk-*` styles) in four
+  numbered sections: your details (name, date of birth with an 18+ check, email, phone),
+  billing address (street, postcode, city, country), collection (date — future only —
+  plus a time slot, trade-in request, notes) and **payment method**.
+- **Payment methods**: bank transfer, financing (shows an indicative monthly figure),
+  card on collection, cash on collection — plus a money summary with a **10% refundable
+  reservation deposit**. No card or bank numbers are collected on the page by design.
+- Every field validates on blur and on submit; the first invalid field is scrolled to and
+  focused, and a summary banner appears. Terms must be accepted.
+- Bookings now carry a **reference code** (e.g. `CB-RDGFB1`), address, collection slot,
+  payment method and deposit; *My Orders* and *Manage Orders* show the new columns.
+
 ## [2.5.0] — 2026-08-07 — README requirements audited & closed
 ### Fixed
 - **Reviews never reached the home page.** `AddReviews` wrote to `cb_demo_reviews`
