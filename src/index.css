@@ -657,3 +657,7 @@ p{color:var(--slate)} a{text-decoration:none} img{max-width:100%}
   background:linear-gradient(135deg,#e7f7f0,#cdeee0);color:#0f7a52;font-size:1.5rem;box-shadow:0 0 0 10px rgba(62,207,142,.1)}
 .cb-bk-done h2{font-size:1.5rem;margin-bottom:10px}
 @media (prefers-reduced-motion: reduce){.cb-bk-pay-opt:hover > span{transform:none}}
+
+/* the dashboard sidebar brand is a link back to the showroom */
+a.ad-brand{text-decoration:none;transition:.16s}
+a.ad-brand:hover{opacity:.85}

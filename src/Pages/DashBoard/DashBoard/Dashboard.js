@@ -22,7 +22,9 @@ const Dashboard = () => {
   return (
     <div className="ad-shell">
       <aside className="ad-side">
-        <div className="ad-brand"><span className="cb-logo"><i className="fas fa-car" /></span> Car Bazar</div>
+        <Link to="/home" className="ad-brand" title="Back to the showroom">
+          <span className="cb-logo"><i className="fas fa-car" /></span> Car Bazar
+        </Link>
 
         <div className="ad-sect">Overview</div>
         <Link className={is(url)} to={`${url}`}><i className="fas fa-chart-line" /> Dashboard</Link>

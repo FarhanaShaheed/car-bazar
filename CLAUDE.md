@@ -33,7 +33,22 @@ Atlas cluster is dead), so the live site never reaches it and falls back to
 Every request goes through `API_BASE` from `src/utils/api.js` — there are no hardcoded
 hosts left in the app, so that one variable flips the whole thing over.
 
-## ⭐ Demo mode (why the live site works with no backend)
+## 🔐 Authentication (REAL Firebase since 2026-08-13)
+`.env.local` (gitignored, **build-time** — CRA inlines it, Vercel env vars do nothing
+because we deploy a prebuilt folder) holds her Firebase web config, currently the
+existing **medicate-diagnostic-center** project. Everyone registers/logs in for real.
+
+**Roles:** `admin` = `GET /users/:email` says so (needs the API) **or** the email is in
+`REACT_APP_ADMIN_EMAILS`. Everyone else is a customer; `AdminRoute` guards the pages.
+
+**Her console still needs:** add `car-bazar-farhana.vercel.app` under Authentication →
+Settings → **Authorized domains**, or Google Sign-In returns `auth/unauthorized-domain`
+(email/password already works from any domain).
+
+To move Car Bazar to its own Firebase project, swap the six values in `.env.local` and
+rebuild — nothing else changes.
+
+## ⭐ Demo mode (only when no Firebase keys are present)
 `src/Pages/Login/Firebase/Firebase.config.js` exports `isFirebaseConfigured`
 (= `Boolean(apiKey)`). `src/hooks/useFirebase.js` runs **dual mode**:
 - **Keys present** → real Firebase Auth + the Express API (original behaviour).

@@ -12,8 +12,33 @@ if (isFirebaseConfigured) initializeFirebase();
    localStorage, and the demo user has admin access so the whole dashboard
    is explorable. With keys present, the original Firebase flow is used. */
 const DEMO_KEY = "cb_demo_user";
+
+/* Who is an administrator when real Firebase auth is on.
+   Firebase answers "who are you", not "what may you do" — the role normally lives in the
+   users collection (GET /users/:email). While that server is not hosted, this allowlist
+   keeps the admin panel reachable: set REACT_APP_ADMIN_EMAILS=a@b.de,c@d.de at build time.
+   Everyone else who signs up through Firebase is a normal customer. */
+const ADMIN_EMAILS = (process.env.REACT_APP_ADMIN_EMAILS || "")
+  .split(",").map((e) => e.trim().toLowerCase()).filter(Boolean);
+const isConfiguredAdmin = (email) => ADMIN_EMAILS.includes(String(email || "").toLowerCase());
 const demoRead = () => { try { return JSON.parse(localStorage.getItem(DEMO_KEY)) || null; } catch { return null; } };
 const demoWrite = (u) => { try { u ? localStorage.setItem(DEMO_KEY, JSON.stringify(u)) : localStorage.removeItem(DEMO_KEY); } catch {} };
+
+
+/* Raw Firebase codes are unreadable for a visitor ("Firebase: Error (auth/user-not-found)").
+   Same mapper Medicate uses. */
+export const friendlyAuthError = (e) => {
+  const c = (e && (e.code || e.message)) || '';
+  if (c.includes('unauthorized-domain')) return "Google Sign-In isn't enabled for this domain yet — please use email & password.";
+  if (c.includes('invalid-api-key')) return 'Authentication is not configured for this deployment.';
+  if (c.includes('email-already-in-use')) return 'That email is already registered — try logging in instead.';
+  if (c.includes('weak-password')) return 'Please choose a password with at least 6 characters.';
+  if (c.includes('user-not-found') || c.includes('wrong-password') || c.includes('invalid-credential') || c.includes('invalid-login-credentials')) return 'Wrong email or password.';
+  if (c.includes('too-many-requests')) return 'Too many attempts — please wait a moment and try again.';
+  if (c.includes('popup-closed-by-user')) return 'Sign-in window closed before completing.';
+  if (c.includes('network-request-failed')) return 'Network problem — please check your connection.';
+  return (e && e.message) ? e.message.replace('Firebase: ', '') : 'Something went wrong.';
+};
 
 const useFirebase = () => {
   const [user, setUser] = useState({});
@@ -47,10 +72,10 @@ const useFirebase = () => {
         const newUser = { email, displayName: name };
         setUser(newUser);
         saveUser(email, name, 'POST');
-        updateProfile(auth.currentUser, { displayName: name }).catch((e) => setAuthError(e.message));
+        updateProfile(auth.currentUser, { displayName: name }).catch((e) => setAuthError(friendlyAuthError(e)));
         history.replace('/');
       })
-      .catch((error) => setAuthError(error.message))
+      .catch((error) => setAuthError(friendlyAuthError(error)))
       .finally(() => setIsLoading(false));
   };
 
@@ -67,7 +92,7 @@ const useFirebase = () => {
         history.replace(destination);
         setAuthError('');
       })
-      .catch((error) => setAuthError(error.message))
+      .catch((error) => setAuthError(friendlyAuthError(error)))
       .finally(() => setIsLoading(false));
   };
 
@@ -85,7 +110,7 @@ const useFirebase = () => {
         const destination = location?.state?.from || '/dashboard';
         history.replace(destination);
       })
-      .catch((error) => setAuthError(error.message))
+      .catch((error) => setAuthError(friendlyAuthError(error)))
       .finally(() => setIsLoading(false));
   };
 
@@ -103,8 +128,8 @@ const useFirebase = () => {
         setUser(user);
         fetch(`${API_BASE}/users/${user.email}`)
           .then((res) => res.json())
-          .then((data) => setAdmin(data.admin))
-          .catch(() => {})
+          .then((data) => setAdmin(Boolean(data && data.admin) || isConfiguredAdmin(user.email)))
+          .catch(() => setAdmin(isConfiguredAdmin(user.email)))   // no server yet -> allowlist
           .finally(() => setIsAdminLoading(false));
         getIdToken(user).then((idToken) => setToken(idToken));
       } else {

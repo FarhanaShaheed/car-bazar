@@ -2,6 +2,22 @@
 
 All notable changes to Car Bazar. Format loosely follows Keep a Changelog.
 
+## [3.0.0] — 2026-08-13 — Real Firebase authentication
+### Removed
+- Reverted the demo-role system (hard-coded `admin@carbazar.test`, the login account
+  picker and the localStorage admin list) — Sadman wants real accounts, not fake ones.
+### Added
+- **Firebase Authentication is now live.** `.env.local` carries the web config, so
+  `isFirebaseConfigured` is true and every visitor signs up / logs in through Firebase
+  with a real password. Random credentials are rejected.
+- **Roles for real auth:** the admin flag comes from `GET /users/:email` when the API is
+  up, and otherwise from `REACT_APP_ADMIN_EMAILS` (build-time allowlist). Everyone who
+  registers is a customer; only listed addresses see the Administration section.
+- `friendlyAuthError()` (same mapper Medicate uses) — visitors see "Wrong email or
+  password." instead of `Firebase: Error (auth/user-not-found)`.
+### Fixed
+- Dashboard sidebar logo links back to the showroom (kept from the reverted commit).
+
 ## [2.7.0] — 2026-08-13 — One switch to a real database
 ### Changed
 - All 15 hardcoded `http://localhost:5000` calls now go through **`src/utils/api.js`**
