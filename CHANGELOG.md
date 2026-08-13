@@ -2,6 +2,19 @@
 
 All notable changes to Car Bazar. Format loosely follows Keep a Changelog.
 
+## [3.1.0] — 2026-08-14 — Contact messages reach the admin
+### Added
+- **Admin → Messages** (`src/Pages/DashBoard/Messages/Messages.js`): every contact-form
+  enquiry with sender, phone, topic, text and time; **Reply** opens a pre-filled email to
+  the sender and marks the enquiry *Replied* (the reply text is stored on the record),
+  plus Delete. Admin-only via `AdminRoute`.
+- Server: `GET/POST/PUT/DELETE /messages` on a new `messages` collection, and the contact
+  form now POSTs there (localStorage stays as the offline fallback).
+- **"Write a review"** button under *What buyers say* on the home page — previously the
+  review form was only reachable from inside the dashboard sidebar.
+- Server is now deployable as a Vercel serverless function (`api/index.js` + `vercel.json`);
+  `index.js` exports the Express app and only calls `listen()` when run directly.
+
 ## [3.0.2] — 2026-08-13
 ### Fixed
 - **"DEMO MODE" was still shown after logging in with a real Firebase account.** The

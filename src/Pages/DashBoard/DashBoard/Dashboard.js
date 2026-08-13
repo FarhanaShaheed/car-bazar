@@ -12,6 +12,7 @@ import MyOrders from '../MyOrders/MyOrders';
 import AddReviews from './../AddReviews/AddReviews';
 import AdminRoute from './../../Login/AdminRoute/AdminRoute';
 import { isFirebaseConfigured } from '../../Login/Firebase/Firebase.config';
+import Messages from '../Messages/Messages';
 
 const Dashboard = () => {
   const { path, url } = useRouteMatch();
@@ -40,6 +41,7 @@ const Dashboard = () => {
           <>
             <div className="ad-sect">Administration</div>
             <Link className={is(`${url}/manageOrders`)} to={`${url}/manageOrders`}><i className="fas fa-tasks" /> Manage Orders</Link>
+            <Link className={is(`${url}/messages`)} to={`${url}/messages`}><i className="fas fa-envelope" /> Messages</Link>
             <Link className={is(`${url}/manageProducts`)} to={`${url}/manageProducts`}><i className="fas fa-boxes" /> Manage Products</Link>
             <Link className={is(`${url}/addProduct`)} to={`${url}/addProduct`}><i className="fas fa-plus-circle" /> Add Product</Link>
             <Link className={is(`${url}/makeAdmin`)} to={`${url}/makeAdmin`}><i className="fas fa-user-shield" /> Make Admin</Link>
@@ -73,6 +75,7 @@ const Dashboard = () => {
             <AdminRoute path={`${path}/addProduct`}><AddProduct /></AdminRoute>
             <AdminRoute path={`${path}/manageProducts`}><ManageProducts /></AdminRoute>
             <AdminRoute path={`${path}/manageOrders`}><ManageOrders /></AdminRoute>
+            <AdminRoute path={`${path}/messages`}><Messages /></AdminRoute>
             <Route path={`${path}/payment`}><Payment /></Route>
             <Route path={`${path}/myOrders`}><MyOrders /></Route>
             <Route path={`${path}/addreviews`}><AddReviews /></Route>

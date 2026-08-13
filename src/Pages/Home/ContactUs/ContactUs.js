@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import googleMap from '../../images/google-map.jfif';
 import '../ContactUs/ContactUs.css';
+import API_BASE from '../../../utils/api';
 
 /* Contact — 2026 redesign.
    Split panel: dark info rail + floating-label form with validation and a
@@ -69,16 +70,19 @@ const ContactUs = () => {
 
     setStatus('sending');
     const entry = { ...form, topic, at: new Date().toISOString() };
-    setTimeout(() => {
-      try {
-        const all = JSON.parse(localStorage.getItem('cb_demo_messages') || '[]');
-        all.unshift(entry);
-        localStorage.setItem('cb_demo_messages', JSON.stringify(all));
-      } catch (_) {
-        /* storage unavailable — the confirmation still shows */
-      }
-      setStatus('sent');
-    }, 900);
+    // real API first so the admin's Messages page sees it; localStorage keeps the demo working
+    fetch(`${API_BASE}/messages`, {
+      method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(entry),
+    })
+      .then((r) => { if (!r.ok) throw new Error('api'); return r.json(); })
+      .catch(() => {
+        try {
+          const all = JSON.parse(localStorage.getItem('cb_demo_messages') || '[]');
+          all.unshift(entry);
+          localStorage.setItem('cb_demo_messages', JSON.stringify(all));
+        } catch (_) { /* storage unavailable — the confirmation still shows */ }
+      })
+      .finally(() => setStatus('sent'));
   };
 
   const reset = () => {

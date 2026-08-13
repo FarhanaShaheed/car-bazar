@@ -664,3 +664,16 @@ a.ad-brand:hover{opacity:.85}
 
 /* header chip: amber for administrators, neutral for customers */
 .ad-chip.is-admin{background:linear-gradient(135deg,var(--amber),var(--amber-dark));color:#141414;border-color:transparent}
+
+/* admin: messages page — reply modal + quoted enquiry */
+.ad-reply{margin-top:8px;padding:8px 10px;border-left:3px solid var(--amber);background:#fff8ee;border-radius:0 8px 8px 0;font-size:.8rem;color:var(--ink)}
+.ad-modal{position:fixed;inset:0;z-index:120;background:rgba(9,12,20,.55);backdrop-filter:blur(4px);display:grid;place-items:center;padding:20px}
+.ad-modal-card{background:#fff;border-radius:20px;box-shadow:0 30px 70px rgba(0,0,0,.35);padding:26px 28px;width:100%;max-width:560px}
+.ad-modal-card h3{font-size:1.2rem;margin:0 0 4px}
+.ad-modal-sub{color:var(--slate);font-size:.84rem;margin-bottom:14px}
+.ad-quote{margin:0 0 16px;padding:12px 14px;background:var(--paper);border-left:3px solid var(--line);border-radius:0 10px 10px 0;font-size:.86rem;line-height:1.6;color:var(--ink)}
+.ad-modal-card textarea{width:100%;font-family:inherit;font-size:.92rem;border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;outline:none;resize:vertical;line-height:1.6}
+.ad-modal-card textarea:focus{border-color:var(--amber);box-shadow:0 0 0 4px rgba(255,159,28,.16)}
+.ad-modal-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:16px}
+.ad-linkbtn{background:none;border:none;color:var(--slate);font-family:inherit;font-size:.86rem;font-weight:600;cursor:pointer;text-decoration:underline}
+.ad-linkbtn:hover{color:var(--ink)}
